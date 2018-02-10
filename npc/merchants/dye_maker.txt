@@ -1,0 +1,798 @@
+//===== rAthena Script ======================================= 
+//= Dye Maker
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Quests to create the eight colored Dyestuffs.
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working [kobra_k88]
+//= 1.1 Spell Checked [Nexon] 
+//= 1.2 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
+//= 1.2b Fixed typos in variable names [ultramage]
+//= 1.3 Made the checks more dynamic [ultramage]
+//= 1.3b Fixed incorrect checking loop structure [ultramage]
+//= 1.4 Added a checkweight. [L0ne_W0lf]
+//============================================================ 
+
+morocc_in,146,99,3	script	Java Dullihan	58,{
+	if ((MaxWeight-Weight) < 200 || checkweight(1201,1) == 0) {
+		mes "- Wait a moment! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please come back later -";
+		mes "- after you put some items into kafra storage. -";
+		close;
+	}
+	mes "[Dye Maker Java Dullihan]";
+	mes "Wow...";
+	mes "Such a nice day. Days like this are perfect to make dyes.";
+	next;
+	switch(select("Talk:Make Dyestuffs:Cancel")) {
+	case 1:
+		mes "[Dye Maker Java Dullihan]";
+		mes "Erm, I don't really have much to say to you. But, if you would like me to tell you about my life, I can do that. It's a little long and boring, but would you like to listen?";
+		next;
+		if (select("Listen:Don't Listen") == 1) {
+			mes "[Dye Maker Java Dullihan]";
+			mes "As long as I can remember, my father has been making dyes. He used to spend countless hours making dyes of different colors. Even when my mother passed away, he never stopped.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "At one point in my life, I became rebellious and ran away from home. I didn't want to be stuck to the family business and wanted to try other things.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "Anyways...";
+			mes "I eventually wound up back home to carry on the family tradition, making dyes for 15 years already. I guess it was really in my blood.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "Something I realized these days is that now I can understand my father. Why my father devoted everything to making dyes...";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "In the middle of all that tedious and hard work, he probably felt the magic of those colors passing on so many dreams for other people.";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "It was probably for those dreams that he tried so hard to make dyes for his customers...";
+			next;
+			mes "[Dye Maker Java Dullihan]";
+			mes "Heh... How do I know this? Well, that's the way I feel right now. Since a couple years ago, I've been able to hear what the colors were saying...";
+			next;
+			mes "[Dye Maker Java Dullian]";
+			mes "Just watch. Someday, I'm going to succeed in making the color my father wanted to, but never got the chance to make.";
+			close;
+		}
+		mes "[Dye Maker Java Dullihan]";
+		mes "Ahahahaha...";
+		mes "Well, I guess no one would want to listen to a measly dyemaker's story anyway. Hahaha....";
+		close;
+
+	case 2:
+		mes "[Dye Maker Java Dullihan]";
+		mes "Great! If you want it, I'll make it for you. I promise I'll make you the color you want. But what color dye would you like to make? The fee is different depending on the color.";
+		next;
+		mes "[Dye Maker Java Dullihan]";
+		mes "Why, do you ask? Just remember that there are colors that are easy to make, and those that require more effort and work. Please don't think the fee is too expensive.";
+		next;
+		mes "[Dye Maker Java Dullihan]";
+		mes "The color of the dye is special, made with all my heart and soul.";
+		next;
+		switch(select("Scarlet Dyestuffs:Lemon Dyestuffs:Cobaltblue Dyestuffs:Darkgreen Dyestuffs:Orange Dyestuffs:Violet Dyestuffs:White Dyestuffs:Black Dyestuffs:Cancel")) {
+		case 1: callsub S_MakeDye,1,1; break;
+		case 2: callsub S_MakeDye,2,1; break;
+		case 3: callsub S_MakeDye,3,2; break;
+		case 4: callsub S_MakeDye,4,3; break;
+		case 5: callsub S_MakeDye,5,4; break;
+		case 6: callsub S_MakeDye,6,4; break;
+		case 7: callsub S_MakeDye,7,4; break;
+		case 8: callsub S_MakeDye,8,4; break;
+		case 9:
+			mes "[Dye Maker Java Dullihan]";
+			mes "Eeeehhhh!! What's this? You change your mind now!? So disappointing...";
+			close;
+		}
+
+	case 3:
+		mes "[Dye Maker Java Dullihan]";
+		mes "I'm not bragging or anything. But I have the skills to make dyestuff. If you ever need dyestuff, please come to me. I'll make them for you at a reasonable price.";
+		close;
+	}
+
+S_MakeDye:
+	mes "[Dye Maker Java Dullihan]";
+	switch(getarg(0)) {
+	case 1:
+		mes "Mmm... I need 30 Red Herbs, 1 Counteragent, and 1 Empty Bottle to make Red Dyestuffs. The fee is only 3000 zeny to make it.";
+		setarray .@item[0], 507, 973, 713;
+		setarray .@count[0], 30,   1,   1;
+		set .@cost,3000;
+		set .@dyestuff,975;
+		break;
+	case 2:
+		mes "Mmm... I need 30 Yellow Herbs, 1 Couneragent, and 1 Empty Bottle to make Lemon Dyestuffs. The fee is only 3000 zeny to make it.";
+		setarray .@item[0], 508, 973, 713;
+		setarray .@count[0], 30,   1,   1;
+		set .@cost,3000;
+		set .@dyestuff,976;
+		break;
+	case 3:
+		mes "Mmm... I need 20 Blue Herbs, 1 Counteragent, and 1 Empty Bottle to make Cobaltblue Dyestuff. It's hard to use the Blue Herb, so the fee is going to be 3500 zeny.";
+		setarray .@item[0], 510, 973, 713;
+		setarray .@count[0], 20,   1,   1;
+		set .@cost,3500;
+		set .@dyestuff,978;
+		break;
+	case 4:
+		mes "Mmm... I need 5 Blue Herbs, 20 Green Herbs, 20 Yellow Herbs, 1 Counteragent, 1 Mixture, and 1 Empty Bottle to make Darkgreen Dyestuffs. Don't get all of the materials confused. The fee is only 5000 zeny.";
+		setarray .@item[0], 510, 511, 508, 974, 973, 713;
+		setarray .@count[0],  5,  20,  20,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,979;
+		break;
+	case 5:
+		mes "Mmm... I need 20 Red Herbs, 20 Yellow Herbs, 1 Counteragent, 1 Mixture, and 1 Empty Bottle to make Orange Dyestuff. The fee is going to be 5000 zeny.";
+		setarray .@item[0], 507, 508, 974, 973, 713;
+		setarray .@count[0], 20,  20,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,980;
+		break;
+	case 6:
+		mes "Mmm... I need 10 Blue Herbs, 30 Red Herbs, 1 Counteragent, 1 Mixture, and 1 Empty Bottle to make Violet Dyestuffs. The fee will be 5000 zeny.";
+		setarray .@item[0], 510, 507, 974, 973, 713;
+		setarray .@count[0], 10,  30,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,981;
+		break;
+	case 7:
+		mes "Mmm... I need 30 White Herbs, 1 Counteragent, and 1 Empty bottle to make White Dyestuffs. The fee will be 3000 zeny.";
+		setarray .@item[0], 509, 973, 713;
+		setarray .@count[0], 30,   1,   1; 
+		set .@cost,3000;
+		set .@dyestuff,982;
+		break;
+	case 8:
+		mes "Mmm... I need 30 of each Red, Yellow, and Green Herb, 5 Blue Herbs, 1 Counteragent, 1 Mixture, and 1 Empty Bottle. The process takes longer and more effort than the others, so it is going to be 7000 zeny.";
+		setarray .@item[0], 507, 508, 511, 510, 974, 973, 713;
+		setarray .@count[0], 30,  30,  30,   5,   1,   1,   1;
+		set .@cost,7000;
+		set .@dyestuff,983;
+		break;
+	}
+	next;
+	mes "[Dye Maker Java Dullihan]";
+	switch(getarg(1)) {
+	case 1: mes "Ah! I think you would have everything ready. Would you like to start the process?"; break;
+	case 2: mes "Okay! I believe you would have everything ready. Would you like to start the process?"; break;
+	case 3: mes "Okay! I believe you would have everything ready. Shall we begin the process?"; break;
+	case 4: mes "Okay! I believe you would have everything prepared. Would you like to start the process?"; break;
+	}
+	next;
+	if (select("Make Dyestuffs:Cancel") == 1) {
+		set .@size, getarraysize(.@item);
+		// check requirements
+		for( set .@i,0 ; .@i < .@size ; set .@i,.@i+1 )
+			if( countitem(.@item[.@i]) < .@count[.@i] )
+				break;
+		if( .@i < .@size || Zeny < .@cost ) {
+			mes "[Dye Maker Java Dullihan]";
+			mes "Hmmm. Not enough...";
+			mes "I don't think I'll be able to make the color you want with those materials. Why don't you go get some more materials...?";
+			close;
+		}
+		// delete items
+		for (set .@i, 0; .@i < .@size ; set .@i, .@i+1)
+			delitem .@item[.@i], .@count[.@i];
+		set Zeny, Zeny-.@cost;
+		// get dyestuff
+		getitem .@dyestuff,1;
+		
+		mes "[Dye Maker Java Dullihan]";
+		mes "Hmm... It came out pretty well. A very rich color. Of course I'll be trying harder to make a more charming color...";
+		next;
+		mes "[Dye Maker Java Dullihan]";
+		mes "Well, then. Stop by whenever you need more dyes.";
+		close;
+	}
+	mes "[Dye Maker Java Dullihan]";
+	mes "Eeeehhhh!! What's this?";
+	mes "You change your mind now!? So disappointing...";
+	return;
+}
+
+//===== rAthena Script ======================================= 
+//= Counteragent and Mixture Quest(Morgenstein)
+//===== By: ================================================== 
+//= kobra_k88
+//= added some dialogs for Morgenstein by Komurka
+//===== Current Version: ===================================== 
+//= 2.2b
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Counteragent and Mixtures for making dyes & Alchemist Job Quest
+//===== Additional Comments: ================================= 
+//= 2.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 2.2a A few minor fixes. (bugreport:1122) [L0ne_W0lf]
+//= 2.2b Follow up fixes to bugreport:1122 [L0ne_W0lf]
+//============================================================ 
+
+alberta_in,133,55,3	script	Louitz#cm	84,{
+	if (molgenstain == 2) {
+		mes "[Merchant Louitz]";
+		mes "Oh, it's you again.";
+		mes "So did you try finding";
+		mes "that nutcase scientist";
+		mes "who lives over in Geffen?";
+		next;
+		if (select("Talk About Molgenstein:Cancel") == 1) {
+			mes "[Merchant Louitz]";
+			mes "You know where he lives";
+			mes "but didn't check it out? Hey,";
+			mes "he may be off his rocker, but";
+			mes "I guess most geniuses are";
+			mes "like that. Still, I think it'd be^FFFFFFss^000000 a good idea if you see him.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "I mean...";
+			mes "It's only a matter";
+			mes "of time until a smart guy";
+			mes "like that creates something";
+			mes "truly miraculous, right?";
+			close;
+		}
+		mes "[Merchant Louitz]";
+		mes "...Hello?";
+		mes "Hellooo? Hey.";
+		mes "Hey! I'm talkin'";
+		mes "to you! Man, I hate";
+		mes "it when you adventurers";
+		mes "just shut up and space out...";
+		close;
+	}
+	mes "[Merchant Louitz]";
+	mes "Heya.";
+	mes "What's up?";
+	next;
+	if (countitem(971) > 0 && countitem(972) > 0) {
+		switch(select("Talk:Talk about the solutions.:Cancel")) {
+		case 1:
+			mes "[Merchant Louitz]";
+			mes "When I was in Geffen";
+			mes "looking for magic items,";
+			mes "I heard rumors of this really";
+			mes "crazy scientist guy. So I got";
+			mes "curious, asked around, and";
+			mes "eventually found this guy.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Boy, oh boy, this guy was";
+			mes "screwy. He didn't even know";
+			mes "I was there the whole time and";
+			mes "just kept mumbling this mumbo";
+			mes "jumbo while working on his";
+			mes "experiments. Words like, um...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Yeah, he kept mumbling";
+			mes "words like ''Karvodailnirol''";
+			mes "and ''Detrimindexta.'' The";
+			mes "first time I heard it, I thought";
+			mes "it was just crazy talk, you know?";
+			next;
+			mes "[Merchant Louitz]";
+			mes "But it turns out,";
+			mes "this Karvodailnirol";
+			mes "and Detrimindexta actually";
+			mes "exist. I think they're special";
+			mes "liquids that don't work quite";
+			mes "like any liquids we're used to.";
+			close;
+		case 2:
+			set molgenstain,1;
+			mes "[Merchant Louitz]";
+			mes "Hey, this is one of";
+			mes "those solutions that";
+			mes "scientist kept mentioning.";
+			mes "You were able to get one";
+			mes "of these? Huh. Now, I have";
+			mes "no idea what to do with them... ";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Ah, but that crazy";
+			mes "scientist would know.";
+			mes "I don't remember exactly";
+			mes "where he lives, but I know";
+			mes "he's in Geffen and that his";
+			mes "name is ^0000FFMolgenstein^000000.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hmm... You better";
+			mes "go around Geffen and";
+			mes "around first. I know for";
+			mes "ask around first. I know for";
+			mes "sure that somebody knows";
+			mes "where you can find Molgenstein.";
+			close;
+		case 3:
+			mes "[Merchant Louitz]";
+			mes "Um...";
+			mes "Good talking";
+			mes "to you pal. Uh,";
+			mes "see ya 'round. Take";
+			mes "care of yourself, 'kay?";
+			close;
+		}
+	}
+	if (countitem(972) > 0) {
+		switch(select("Talk:Talk about Karvodailnirol:Cancel")) {
+		case 1:
+			mes "[Merchant Louitz]";
+			mes "When I was in Geffen";
+			mes "looking for magic items,";
+			mes "I heard rumors of this really";
+			mes "crazy scientist guy. So I got";
+			mes "curious, asked around, and";
+			mes "eventually found this guy.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Boy, oh boy, this guy was";
+			mes "screwy. He didn't even know";
+			mes "I was there the whole time and";
+			mes "just kept mumbling this mumbo";
+			mes "jumbo while working on his";
+			mes "experiments. Words like, um...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Yeah, he kept mumbling";
+			mes "words like ''Karvodailnirol''";
+			mes "and ''Detrimindexta.'' The";
+			mes "first time I heard it, I thought";
+			mes "it was just crazy talk, you know?";
+			next;
+			mes "[Merchant Louitz]";
+			mes "But it turns out,";
+			mes "this Karvodailnirol";
+			mes "and Detrimindexta actually";
+			mes "exist. I think they're special";
+			mes "liquids that don't work quite";
+			mes "like any liquids we're used to.";
+			close;
+		case 2:
+			set molgenstain,1;
+			mes "[Merchant Louitz]";
+			mes "Oh hey, this is that";
+			mes "Karvodailnirol that the";
+			mes "old scientist was talking";
+			mes "about, huh? Of course, only";
+			mes "someone like that guy would";
+			mes "know what to do with it...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hey, why don't you go";
+			mes "and ask him about it?";
+			mes "I don't remember exactly";
+			mes "where he lives, but I know";
+			mes "he's in Geffen and that his";
+			mes "name is ^0000FFMolgenstein^000000.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hmm... You better";
+			mes "go around Geffen and";
+			mes "around first. I know for";
+			mes "ask around first. I know for";
+			mes "sure that somebody knows";
+			mes "where you can find Molgenstein.";
+			close;
+		case 3:
+			mes "[Merchant Louitz]";
+			mes "Um...";
+			mes "Good talking";
+			mes "to you pal. Uh,";
+			mes "see ya 'round. Take";
+			mes "care of yourself, 'kay?";
+			close;
+		}
+	}
+	if (countitem(971) > 0) {
+		switch(select("Talk:Talk about Detrimindexta:Cancel")) {
+		case 1:
+			mes "[Merchant Louitz]";
+			mes "When I was in Geffen";
+			mes "looking for magic items,";
+			mes "I heard rumors of this really";
+			mes "crazy scientist guy. So I got";
+			mes "curious, asked around, and";
+			mes "eventually found this guy.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Boy, oh boy, this guy was";
+			mes "screwy. He didn't even know";
+			mes "I was there the whole time and";
+			mes "just kept mumbling this mumbo";
+			mes "jumbo while working on his";
+			mes "experiments. Words like, um...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Yeah, he kept mumbling";
+			mes "words like ''Karvodailnirol''";
+			mes "and ''Detrimindexta.'' The";
+			mes "first time I heard it, I thought";
+			mes "it was just crazy talk, you know?";
+			next;
+			mes "[Merchant Louitz]";
+			mes "But it turns out,";
+			mes "this Karvodailnirol";
+			mes "and Detrimindexta actually";
+			mes "exist. I think they're special";
+			mes "liquids that don't work quite";
+			mes "like any liquids we're used to.";
+			close;
+		case 2:
+			set molgenstain,1;
+			mes "[Merchant Louitz]";
+			mes "Oh hey, this is that";
+			mes "Detrimindexta that the";
+			mes "old scientist was talking";
+			mes "about, huh? Of course, only";
+			mes "someone like that guy would";
+			mes "know what to do with it...";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hey, why don't you go";
+			mes "and ask him about it?";
+			mes "I don't remember exactly";
+			mes "where he lives, but I know";
+			mes "he's in Geffen and that his";
+			mes "name is ^0000FFMolgenstein^000000.";
+			next;
+			mes "[Merchant Louitz]";
+			mes "Hmm... You better";
+			mes "go around Geffen and";
+			mes "around first. I know for";
+			mes "ask around first. I know for";
+			mes "sure that somebody knows";
+			mes "where you can find Molgenstein.";
+			close;
+		case 3:
+			mes "[Merchant Louitz]";
+			mes "Um...";
+			mes "Good talking";
+			mes "to you pal. Uh,";
+			mes "see ya 'round. Take";
+			mes "care of yourself, 'kay?";
+			close;
+		}
+	}
+	if (select("Talk:Cancel") == 1) {
+		mes "[Merchant Louitz]";
+		mes "When I was in Geffen";
+		mes "looking for magic items,";
+		mes "I heard rumors of this really";
+		mes "crazy scientist guy. So I got";
+		mes "curious, asked around, and";
+		mes "eventually found this guy.";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Boy, oh boy, this guy was";
+		mes "screwy. He didn't even know";
+		mes "I was there the whole time and";
+		mes "just kept mumbling this mumbo";
+		mes "jumbo while working on his";
+		mes "experiments. Words like, um...";
+		next;
+		mes "[Merchant Louitz]";
+		mes "Yeah, he kept mumbling";
+		mes "words like ''Karvodailnirol''";
+		mes "and ''Detrimindexta.'' The";
+		mes "first time I heard it, I thought";
+		mes "it was just crazy talk, you know?";
+		next;
+		mes "[Merchant Louitz]";
+		mes "But it turns out,";
+		mes "this Karvodailnirol";
+		mes "and Detrimindexta actually";
+		mes "exist. I think they're special";
+		mes "liquids that don't work quite";
+		mes "like any liquids we're used to.";
+		close;
+	}
+	mes "[Merchant Louitz]";
+	mes "Um...";
+	mes "Good talking";
+	mes "to you pal. Uh,";
+	mes "see ya 'round. Take";
+	mes "care of yourself, 'kay?";
+	close;
+}
+
+geffen,181,114,3	script	Aure Dupon#cm	82,{
+	if (molgenstain == 2) {
+		mes "[Aure Dupon]";
+		mes "It seems that our";
+		mes "paths yet cross again.";
+		mes "Coincidence? It's more";
+		mes "than that. This is ^0000FFfate^000000.";
+		next;
+		if (select("Talk About Molgenstein:Cancel") == 1) {
+			mes "[Aure Dupon]";
+			mes "Have you not met";
+			mes "Molgenstein yet? He";
+			mes "lives on the second floor";
+			mes "of the Forge. Although we've";
+			mes "just met, I must warn you not";
+			mes "to get too close to him...";
+			close;
+		}
+		mes "[Aure Dupon]";
+		mes "Go then, and";
+		mes "may the tides of";
+		mes "destiny carry you";
+		mes "to where you must go.";
+		close;
+	}
+	mes "[Aure Dupon]";
+	mes "Time flows gently";
+	mes "and subtly, but no";
+	mes "force in this world";
+	mes "can possibly stop it.";
+	mes "Mankind is not even a";
+	mes "mote in the grand scheme.";
+	next;
+	if (molgenstain > 0) {
+		switch(select("Talk:Ask About Molgenstein:Cancel")) {
+		case 1:
+			mes "[Aure Dupon]";
+			mes "To have goals and focus";
+			mes "is good, but to be obsessive";
+			mes "about one single thing can be";
+			mes "quite destructive. Relax, empty";
+			mes "your mind, and let yourself be";
+			mes "carried by the tides of destiny.";
+			close;
+		case 2:
+			set molgenstain,2;
+			mes "[Aure Dupon]";
+			mes "Molgenstein...?";
+			mes "The man is obsessed";
+			mes "with conquering the forces";
+			mes "that control our world. But";
+			mes "you seem to be curious about";
+			mes "him for some reason. Hmmm...";
+			next;
+			mes "[Aure Dupon]";
+			mes "It would be best if you";
+			mes "were to see Molgenstein";
+			mes "and judge his character for";
+			mes "yourself. You may find him in";
+			mes "the second floor of the Geffen";
+			mes "Forge. Go: It is your destiny.";
+			close;
+		case 3:
+			mes "[Aure Dupon]";
+			mes "Go then, and";
+			mes "may the tides of";
+			mes "destiny carry you";
+			mes "to where you must go.";
+			close;
+		}
+	}
+	if (select("Talk:Cancel") == 1) {
+		mes "[Aure Dupon]";
+		mes "To have goals and focus";
+		mes "is good, but to be obsessive";
+		mes "about one single thing can be";
+		mes "quite destructive. Relax, empty";
+		mes "your mind, and let yourself be";
+		mes "carried by the tides of destiny.";
+		close;
+	}
+	mes "[Aure Dupon]";
+	mes "Go then, and";
+	mes "may the tides of";
+	mes "destiny carry you";
+	mes "to where you must go.";
+	close;
+}
+
+geffen_in,141,140,3	script	Molgenstein#cm	121,{
+	if (checkweight(1201,1) == 0) {
+		mes "- Wait a minute !! -";
+		mes "- Currently you're carrying -";
+		mes "- too many items with you. -";
+		mes "- Please try again -";
+		mes "- after you loose some weight. -";
+		close;
+	}
+	if (MISC_QUEST & 4) {
+		mes "[Chemist Molgenstein]";
+		mes ".....";
+		mes "Welcome.";
+		mes "Hehehehe....";
+		mes "Heeheeheeheehee....";
+		next;
+		switch(select("Ask about his research:Ask him to make a new solution.:Cancel")) {
+		case 1:
+			mes "[Chemist Molgenstein]";
+			mes "Heeheeheeheee...";
+			mes "You must have heard the rumors about my research. Yes! But since you probably know already, I'll tell you without hiding, I mean, there's nothing to hide.";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Actually, you can say my research is complete! Nothing's impossible for my genius! Bwahaha, it's just a matter of time!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Are you still here? Right, you wanted to know about my research. It's actually very simple. I was just trying to invent a super liquid that can melt everything!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Isn't it interesting? No matter how strong you are, you can't break apart stone or steel, but with my new liquid, you can melt those things, making them soft like puddy!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "It can't melt everything yet, but I did find that you could combine things that you could never mix before with my invention. Heeheeheehee~!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "You can make a whole lot of things that you'd never would have imagined possible! I can make you a lot of new things you never would have imagined using this method... as long as you want it!!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "The endorphins are rushing to my face at least 2.1 times faster than the usual rate! Ah! I'm so excited! I... I just can't hide it!";
+			close;
+		case 2:
+			mes "[Chemist Molgenstein]";
+			mes "So...";
+			mes "You want me to make something totally new, huh? Hehhehheh! I love your sense of scientific adventure!";
+			next;
+			switch(select("Counteragent:Mixture")) {
+			case 1:
+				mes "[Chemist Molgenstein]";
+				mes "Ooh...!";
+				mes "You want to make a Counteragent? Hohohohoho, let's see what we'll need...";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Oh, I remember, yes, Alcohol, and um, er, Detrimindexta and an Empty Bottle to put it it all in. Just these three items and 3000 zeny.";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Bwahahahah!";
+				mes "Oh, I just can't wait to make this! Are you ready to begin?";
+				next;
+				if (select("Make:Cancel") == 1) {
+					if (countitem(970) == 0 || countitem(971) == 0 || countitem(713) == 0 || Zeny < 3000) {
+						mes "[Chemist Molgenstein]";
+						mes "Heuheuheuheuh.... not enough... not enough.. Haah...Haah... Go..... get the rest of the materials!";
+						mes "We'll postpone the fun until then... Heuheuheuheuheuh.";
+						close;
+					}
+					mes "[Chemist Molgenstein]";
+					mes "Ooooooooh...... heeheeheeheehee...... yes... like that...... yes... more... more........ heeheeheehee.";
+					mes ".... Aaah.... ahah... ha....ahahooooooooohoh!";
+					next;
+					if (countitem(970) < 1 || countitem(971) < 1 || countitem(713) < 1) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... not enough... not enough... haah...haah... go..... go get the rest of the materials!!";
+						close;
+					}
+					delitem 970,1; //Alchol
+					delitem 971,1; //Detrimindexta
+					delitem 713,1; //Empty_Bottle
+					set Zeny, Zeny-3000;
+					getitem 973,1; //Counteragent
+					mes "[Chemist Molgenstein]";
+					mes "Hee hee hee...";
+					mes "Haaaaah......";
+					mes "Oh? We're done already?!";
+					close;
+				}
+				mes "[Chemist Molgenstein]";
+				mes "Hee hee hee...!";
+				mes "Come back when";
+				mes "you're ready~";
+				close;
+			case 2:
+				mes "[Chemist Molgenstein]";
+				mes "Ooh...!";
+				mes "You want to make a Mixture? Hohohohoho, let's see what we'll need...";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Ooh, I remember now, yes, Alcohol, and um, er, Karvodailnirol and an empty bottle to put all of it in. Just these three items and 4000 zeny.";
+				next;
+				mes "[Chemist Molgenstein]";
+				mes "Bwahahahah!";
+				mes "Oh, I just can't wait to make this! Are you ready to begin?";
+				next;
+				if (select("Make:Cancel") == 1) {
+					if (countitem(970) == 0 || countitem(972) == 0 || countitem(713) == 0 || Zeny < 4000) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... not enough... not enough... haah...haah... go..... go get the rest of the materials!!";
+						mes "We'll have to postpone the fun for later... Hehehehe";
+						close;
+					}
+					mes "[Chemist Molgenstein]";
+					mes "Ooooooooh... heehee...... yes... like that...... yes... more... more........ heeheeheehee";
+					mes ".... Aaah.... ahah... ha....ahah...oooooooooooooooooh!!!...!!!!!!";
+					next;
+					if (countitem(970) < 1 || countitem(972) < 1 || countitem(713) < 1) {
+						mes "[Chemist Molgenstein]";
+						mes "Hohohoho.... not enough... not enough... haah...haah... go..... go get the rest of the materials!!";
+						close;
+					}
+					delitem 970,1; //Alchol
+					delitem 972,1; //Karvodailnirol
+					delitem 713,1; //Empty_Bottle
+					set Zeny, Zeny-4000;
+					getitem 974,1; //Mixture
+					mes "[Chemist Molgenstein]";
+					mes "Hee hee hee...";
+					mes "Haaaaah......";
+					mes "Oh? We're done already?!";
+					close;
+				}
+				mes "[Chemist Molgenstein]";
+				mes "[Chemist Molgenstein]";
+				mes "Hee hee hee...!";
+				mes "Come back when";
+				mes "you're ready~";
+				mes "Heh... heuheuheuheh....";
+				close;
+			}
+		case 3:
+			mes "[Chemist Molgenstein]";
+			mes "Heehee....heheheheh....";
+			close;
+		}
+	}
+	if (molgenstain == 2) {
+		set MISC_QUEST,MISC_QUEST | 4;
+		set molgenstain,0;
+		mes "[Chemist Molgenstein]";
+		mes "Heeheeheehee.... welcome. Hehehehe.... heeheeheeheehee....";
+		next;
+		mes "[Chemist Molgenstein]";
+		mes "Ah...?!";
+		mes "So sorry if I weirded you out. It's just... I haven't seen a living person in soooo long. So, er, what can I do for you??";
+		next;
+		if (select("Ask about his research.:Cancel.") == 1) {
+			mes "[Chemist Molgenstein]";
+			mes "Heeheeheeheee...";
+			mes "You must have heard the rumors about my research. Yes! But since you probably know already, I'll tell you without hiding, I mean, there's nothing to hide.";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Actually, you can say my research is complete! Nothing's impossible for my genius! Bwahaha, it's just a matter of time!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Are you still here? Right, you wanted to know about my research. It's actually very simple. I was just trying to invent a super liquid that can melt everything!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "Isn't it interesting? No matter how strong you are, you can't break apart stone or steel, but with my new liquid, you can melt those things, making them soft like puddy!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "It can't melt everything yet, but I did find that you could combine things that you could never mix before with my invention.";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "I can make you a lot of new things you never would have imagined using this method... as long as you want it!!";
+			next;
+			mes "[Chemist Molgenstein]";
+			mes "The endorphins are rushing to my face at least 2.1 times faster than the usual rate! Ah! I'm so excited! I... I just can't hide it!";
+			close;
+		}
+		close;
+	}
+	mes "[Chemist Molgenstein]";
+	mes "Heeheeheehee...";
+	mes "You're not here to be a test subject, are you? Probably not though. Not since my little 'accident.' Heeheeheeee~!";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.0 Fully working
+//= 1.1 Update for Alchemist Quest.
+//= 1.2 added check for Empty Bottle [Lupus]
+//= 1.3 Fixed some lil thingys [Darkchild]
+//= 1.4 More li'l thing, added comments for items IDs [Lupus]
+//= 1.5 Fixed Spelling mistakes. [Nexon]
+//= 1.6 Fixed some bugs, also related to Alch Job quest [Lupus]
+//= 1,7 Fixed exploit
+//= 1.8 Got rid of 'al_morgen' var [Lupus]
+//= 2.1 now uses (MISC_QUEST & 4) bit instead of al_morgen [Lupus]
+//============================================================ 

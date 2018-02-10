@@ -1,0 +1,149 @@
+// Quando player logar começa a contagem de tempo online.
+// A cada hora ele ganha 1 ponto
+// Premiações extras a cada meta completa
+// A contagem é salva por conta
+-	script	loyalty#controller	-1,{ OnInit:
+//====================================================
+//	Configurações Sistema Fidelidade
+//====================================================
+//----------------------------------------------------
+//	1.	Quantidade de pontos de fidelidade por hora
+	set .pontos, 1;			// Padrão: 1 ponto por hora
+//----------------------------------------------------
+//	2.	Permitir contagem de pontos em @at/Vending?
+//	-	(0) Não permitir, (1) Permitir
+	set .vending, 0;		// Padrão: (0) Não permitir
+//----------------------------------------------------
+//	3.	Utilizar Cash ao inves de Pontos de Fidelidade?
+//	-	Caso ativado atribuirá a quantidade de pontos 
+//		p/hora ao comando @cash, sendo assim a cada 1h
+//		online o player recebe X de cash (rops).
+//	-	(0) Não permitir, (1) Permitir
+	set .cash, 0;			// Padrão: (0) Desativado
+//----------------------------------------------------
+//	4.	Ativa sistema de conquistas?
+//	-	Pontos extra para cada conquista alcançada
+//	-	(0) Desativar, (1) Ativar
+	set .achievement, 1;	// Padrão: (1) Ativar
+//----------------------------------------------------
+//	5.	Ativar Loja Itens Fidelidade
+//	-	(0) Desativar, (1) Ativar
+	set .shop, 1;			// Padrão: (1) Ativar
+//----------------------------------------------------
+//	5.1	Itens Loja Fidelidade
+//	-	<item_id>,<qtd_pontos>{<item_id>,<qtd_pontos>,...};
+	setarray .itens[0], 501, 10, 502, 11, 503, 1000;
+//----------------------------------------------------
+//====================================================
+//	Conquistas
+//====================================================
+//	<n° horas>,<quantidade pontos>;
+//	6,5; 6 horas = 5 pontos.
+//	Deixar (;) apenas no ultimo
+	setarray .achievements[0],	6, 5,
+								12, 20,
+								24, 80,
+								48, 320,
+								96, 1280,
+								192, 5120,
+								384, 20480,
+								768, 81920; // Ultimo
+
+//====================================================
+//	IMPORTANTE: Não Alterar as linhas abaixo
+//====================================================									
+donpcevent "loyalty#shop::OnInit"; end; // Carregando Loja
+//----------------------------------------------------
+//	Contagem de minutos/pontos
+OnPCLoginEvent:
+	while(1)
+	{
+		sleep2 60000; // 1 minuto
+		if(!checkvending() || .vending)
+		{
+			query_sql("UPDATE `login` SET `loyalty_minute` = `loyalty_minute` + '1' WHERE `account_id` = '"+getcharid(3)+"'");
+			query_sql("SELECT `loyalty_minute` FROM `login` WHERE account_id = '"+getcharid(3)+"'",.@minuto);
+			if( !(.@minuto%60) )
+			{
+				if( .cash ) atcommand "@cash " + .pontos + "";
+				else query_sql("UPDATE `login` SET `loyalty_points` = `loyalty_points` + '"+.pontos+"' WHERE `account_id` = '"+getcharid(3)+"'");
+				
+				if( .achievement )
+				{
+					for(set .@i, 0; .@i < getarraysize(.achievement); set .@i, .@i + 2)
+						if( .achievements[.@i] == ( .@minuto / 60 ) ) {
+							if( .cash ) atcommand "@cash " + .achievements[.@i+1];
+							else query_sql("UPDATE `login` SET `loyalty_points` = `loyalty_points` + "+.achievements[.@i+1]+" WHERE account_id = '"+getcharid(3)+"'");
+							announce "[Sistema de Fidelidade]: Conquista obtida, "+.achievements[.@i]+"h online, parabéns! Receba "+.achievements[.@i+1]+" Pontos de "+(.cash? "Cash" : "Fidelidade"),bc_self,0xBF5EFF;
+						}
+				}
+			}
+		}
+	}
+end;
+}
+
+-	script	loyalty#agent	-1,{  callfunc "loyalty#resume"; end; }
+
+function	script	loyalty#resume	{
+	copyarray .@achievement[0], getvariableofnpc(.achievements[0],"loyalty#controller"),getarraysize(getvariableofnpc(.achievements,"loyalty#controller"));
+	query_sql ("SELECT `loyalty_minute` / 60 , `loyalty_minute`, `loyalty_points` FROM `login` WHERE account_id = '"+getcharid(3)+"'",.@hora,.@minuto,.@points);
+	set .npc$, "^6F34C2[Sistema de Fidelidade]^000000";
+	mes .npc$;
+	mes "Seja bem vind"+(Sex?"o":"a")+" ^ff0000"+strcharinfo(0)+"^000000!";
+	mes "Tempo de Jogo: ^ff0000"+.@hora+" hora"+(.@hora > 1? "s" : "")+" e "+(.@minuto%60)+" minuto"+(.@minuto > 1? "s" : "")+"^000000.";
+	mes "^F7AD00- Você pode acumular Pontos de Fidelidade permanecendo on-line.^000000";
+	mes "^3487C2- Você pode resgartar diversos prêmios com Pontos de Fidelidade.^000000";
+	next;
+	switch(select("Sair"+( getvariableofnpc(.shop, "loyalty#controller") ? ":Resgatar Itens" : ":" )+( getvariableofnpc(.achievement, "loyalty#controller") ? ":Premiações Extras" : "" )))
+	{
+		case 1: { mes .npc$; mes "Tudo bem, tenha um bom dia."; close; }
+		case 2: { mes .npc$; mes "É pra já, olha só os itens incríveis que temos em nossa lojinha. ^^"; close2; openshop("loyalty#shop"); end; }
+		case 3:
+			mes .npc$;
+			mes "Premiação Padrão";
+			mes "^ff0000Por Hora:^000000 1 Ponto de Fidelidade.";
+			mes " ";
+			mes "Premiações Extras: " + ( .@hora < getelementofarray(getvariableofnpc(.achievements, "loyalty#controller"), (getarraysize(getvariableofnpc(.achievements,"loyalty#controller")) - 2 )) ? "^ff0000Incompleto!":"^00B0EFCompleto!") + "^000000";
+			
+			for(set .@i, 0; .@i < getarraysize(.@achievement); set .@i, .@i + 2)
+			{
+				mes ( .@hora < .@achievement[.@i] ? "^ff0000" + .@achievement[.@i] + "h^000000: " : "^999999" + .@achievement[.@i] + ": ")  + .@achievement[.@i+1] + " Pontos de "+(getvariableofnpc(.cash,"loyalty#controller")? "Cash" : "Fidelidade")+".";
+			}
+			next;
+			mes .npc$;
+			mes "Continue juntando Pontos de Fidelidade e troque por itens incríveis aqui comigo. ^^";
+			mes "Tenha um bom jogo e nos vemos por aí!";
+			next;
+			callfunc "loyalty#resume";
+	}
+}
+
+-	trader	loyalty#shop	-1,{
+	
+OnInit:
+	copyarray .@itens[0], getvariableofnpc(.itens[0],"loyalty#controller"),getarraysize(getvariableofnpc(.itens,"loyalty#controller"));
+	tradertype(NST_CUSTOM);
+	
+	for(set .@i, 0; .@i < getarraysize(.@itens); set .@i, .@i + 2) 
+		sellitem .@itens[.@i],.@itens[.@i+1];
+end;
+
+OnCountFunds: 
+	query_sql ("SELECT `loyalty_points` FROM `login` WHERE account_id = '"+getcharid(3)+"'",@loyalty);
+	setcurrency(@loyalty); 
+end;
+
+OnPayFunds:
+	if( @loyalty < @price )  end;
+	query_sql("UPDATE `login` SET `loyalty_points` = `loyalty_points` - '"+@price+"' WHERE `account_id` = '"+getcharid(3)+"'");
+	purchaseok();
+end;
+}
+
+/*
+	Duplicates
+*/
+prontera,164,165,5	duplicate(loyalty#agent)	Sistema de Fidelidade#prt	833
+
+/* Fim do NPC */

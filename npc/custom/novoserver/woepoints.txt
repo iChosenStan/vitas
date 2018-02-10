@@ -1,0 +1,295 @@
+aru_gld,72,201,3	script	POINT WOE 1#woe1	802,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("[ ^FF0000•^000000 ] Salvar ponto de retorno:[ ^FF0000•^000000 ] Abrir Armazem:[ ^FF0000•^000000 ] Abrir Armazem da Guild:[ ^FF0000•^000000 ] Resetar:[ ^FF0000•^000000 ] Sair"))
+{
+case 1: savepoint "aru_gld",75,194; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+
+}
+}
+
+aru_gld,75,201,3	script	CURA WOE#1	950,4,4,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+aru_gld,67,197,0	warp	woetele0	1,1,arug_cas03,108,53
+
+aru_gld,86,201,3	script	POINT WOE 2#woe2	802,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("[ ^FF0000•^000000 ] Salvar ponto de retorno:[ ^FF0000•^000000 ] Abrir Armazem:[ ^FF0000•^000000 ] Abrir Armazem da Guild:[ ^FF0000•^000000 ] Resetar:[ ^FF0000•^000000 ] Sair"))
+{
+case 1: savepoint "aru_gld",89,194; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+
+}
+}
+
+aru_gld,89,201,3	script	CURA WOE#2	950,4,4,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+aru_gld,82,197,0	warp	woetele1	1,1,arug_cas03,175,54
+
+aru_gld,99,201,3	script	POINT WOE 3#woe3	802,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("[ ^FF0000•^000000 ] Salvar ponto de retorno:[ ^FF0000•^000000 ] Abrir Armazem:[ ^FF0000•^000000 ] Abrir Armazem da Guild:[ ^FF0000•^000000 ] Resetar:[ ^FF0000•^000000 ] Sair"))
+{
+case 1: savepoint "aru_gld",102,194; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+
+}
+}
+
+aru_gld,102,201,3	script	CURA WOE#3	950,4,4,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+aru_gld,95,197,0	warp	woetele3	1,1,arug_cas03,106,70
+	
+aru_gld,112,201,3	script	POINT WOE 4#woe4	802,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("[ ^FF0000•^000000 ] Salvar ponto de retorno:[ ^FF0000•^000000 ] Abrir Armazem:[ ^FF0000•^000000 ] Abrir Armazem da Guild:[ ^FF0000•^000000 ] Resetar:[ ^FF0000•^000000 ] Sair"))
+{
+case 1: savepoint "aru_gld",113,194; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+
+}
+}
+
+aru_gld,115,201,3	script	CURA WOE#3	950,4,4,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+aru_gld,109,197,0	warp	woetele4	1,1,arug_cas03,177,70

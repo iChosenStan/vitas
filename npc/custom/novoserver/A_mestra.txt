@@ -1,0 +1,487 @@
+prontera,153,192,5	script	Mestra das Classes	575,{
+
+	mes "^FF1493[Mestra das Classes]^000000";
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom-dia":(gettime(3)>=13&&gettime(3)<=18?"Boa-tarde":"Boa-noite"))+", ^008aff"+strcharinfo(0)+"^000000 !";
+
+	if ((Class > 6 && Class < 28 && !.svtype) || (Class > 4029 && Class < 4046 && (!.svtype || .svtype == 1)) ||(Class > 4007 && Class < 4023 && .svtype == 1) || (Class > 23 && Class < 26) || (Class > 4046 && Class <= 4049) || (Class > 4053 && Class < 4080) || (Class > 4095 && Class < 4109) || Class == 4190 || Class == 4191)
+
+	{
+
+		mes "Que bom te ver de novo "+strcharinfo(0)+"!";
+
+		mes "O dia está lindo, não acha?";
+
+		close;
+
+	}
+
+	if (SkillPoint)
+
+	{
+		mes "Você precisa utilizar todos os seus pontos de habilidade antes de mudar de classe.";
+
+		close;
+
+	}
+
+	if (checkcart() && checkfalcon() && checkriding())
+
+	{
+		mes "^FF1493[Mestra das Classes]^000000";
+		mes "Você não pode mudar de classe enquanto estiver utilizando Falcão, Carrinho ou PecoPeco.";
+
+		close;
+
+	}
+
+	if (!Class || Class == 4023)
+
+	{
+
+		mes "Vejo que você é apenas um "+jobname(Class)+"!";
+
+		mes "Você está apto a mudar de classe. Qual deseja se tornar?";
+
+		next;
+
+		if (!Class)
+
+		{
+
+			if(.svbaby)
+
+				if(select("^0084ff[ • ]^000000 Classes Normais:^42b000[ • ]^000000 Bebê Aprendiz") == 2)
+
+				{
+
+					if(BaseLevel != 1 || JobLevel != 1)
+
+					{
+
+						mes "^FF1493[Mestra das Classes]^000000";
+
+						mes "Desculpe mas para se tornar um Bebê Aprendiz você deve ter Nível de Base 1 e Nível de Classe 1.";
+
+						close;
+
+					} else
+
+						callsub F_ChangeJob, 4023,0;
+
+				}
+
+			callsub F_ReqBaseJobLevel, 10, 0;
+
+			select ("^0084ff[ • ]^000000 Espadachim:^0084ff[ • ]^000000 Mago:^0084ff[ • ]^000000 Arqueiro:^0084ff[ • ]^000000 Noviço:^0084ff[ • ]^000000 Mercador:^0084ff[ • ]^000000 Gatuno:^0084ff[ • ]^000000 Taekwon:^0084ff[ • ]^000000 Justiceiro:^0084ff[ • ]^000000 Ninja:^0084ff[ • ]^000000 Super Aprendiz");
+
+			set .@chg, ((@menu == 7) ? 4046 : ((@menu == 8 || @menu == 9) ? (16+@menu) : ((@menu == 10) ? 23 : @menu)));
+
+		}
+
+		else
+
+		{
+
+			callsub F_ReqBaseJobLevel, 10, 0;
+
+			select ("^42b000[ • ]^000000 Bebê Espadachim:^42b000[ • ]^000000 Bebê Mago:^42b000[ • ]^000000 Bebê Arqueiro:^42b000[ • ]^000000 Bebê Noviço:^42b000[ • ]^000000 Bebê Mercador:^42b000[ • ]^000000 Bebê Gatuno:^42b000[ • ]^000000 Bebê Super Aprendiz");
+
+			set .@chg, ((@menu == 7) ? 4045 : (4023+@menu));
+
+		}
+
+		callsub F_ChangeJob, set (lastjob1, .@chg),.iniciante[@menu];
+
+	}
+
+	else if (Class > 0 && (Class < 7 || Class == 4046))
+
+	{
+
+		callsub F_ReqBaseJobLevel, 40, 0;
+
+		mes "Vejo que você voltou, e mais forte!";
+
+		mes "Pois bem, que classe deseja seguir agora?";
+
+		switch (Class)
+
+		{
+
+			case 1:
+
+					setarray .@c[0],7,14;
+
+					break;
+
+			case 2:
+
+					setarray .@c[0],9,16;
+
+					break;
+
+			case 3:
+
+					if (Sex)
+
+						setarray .@c[0],11,19;
+
+					else
+
+						setarray .@c[0],11,20;
+
+					break;
+
+			case 4:
+
+					setarray .@c[0],8,15;
+
+					break;
+
+			case 5:
+
+					setarray .@c[0],10,18;
+
+					break;
+
+			case 6:
+
+					setarray .@c[0],12,17;
+
+					break;
+
+			case 4046:
+
+					setarray .@c[0],4047,4049;
+
+					break;
+
+		}
+
+		next;
+
+		select (jobname(.@c[0])+":"+jobname(.@c[1]));
+
+		callsub F_ChangeJob, set(lastjob, .@c[(@menu-1)]),0;
+
+	}
+
+	else if (Class > 6 && Class < 22)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 50, 1;
+
+		mes "Vejo que você está bastante forte!";
+
+		mes "Agora você tem "+(.svtype == 1 ? "a escolha de Renacer e ficar ainda mais forte." : "duas escolhas, você pode Renascer ou evoluir para "+jobname(.class3[lastjob])+".");
+
+		mes "O que você deseja?";
+
+		next;
+
+		if(select("Renascer"+(.svtype == 1 ? "" : ":"+jobname(.class3[lastjob]))) == 1){
+
+			mes "^FF1493[Mestra das Classes]^000000";
+
+			mes "Você tem certeza que deseja renascer?";
+
+			next;
+
+			if (select ("^ff0000[ • ]^000000 Não:^0084ff[ • ]^000000 Sim") == 1)
+
+				close;
+
+			mes "^FF1493[Mestra das Classes]^000000";
+
+			if (Weight > 1500)
+
+			{
+
+				mes "^FF1493[Mestra das Classes]^000000";
+				mes "Você está acima do peso permitido, você precisa ter menos que 1500.";
+
+				close;
+
+			}
+
+			jobchange 4001;
+
+			resetlvl(1);
+
+			mes "Você ganhará 100 Pontos de Atributo";
+
+			mes "para ajudar-lhe em sua jornada.";
+
+			close;
+
+		}
+
+		else
+
+			callsub F_ChangeJob, .class3[lastjob], .class3p[lastjob];
+
+	}
+
+	else if (Class == 4001)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 10, 0;
+
+		mes "^FF1493[Mestra das Classes]^000000";
+		mes "Você voltou tão rápido e está evoluindo muito ^^ ...";
+
+		next;
+
+		callsub F_ChangeJob, (lastjob1+4001),0;
+
+	}
+
+	else if (Class > 4001 && Class < 4008)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 40, 0;
+
+		mes "^FF1493[Mestra das Classes]^000000";
+		mes "Você está "+(.svtype == 1 ? "a um passo do" : "quase chegando ao")+" grau máximo de evolução.";
+
+		mes "E então...";
+
+		next;
+
+		callsub F_ChangeJob, (lastjob+4001),0;
+
+	}
+
+	else if (Class > 4023 && Class < 4030)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 40, 0;
+
+		mes "^FF1493[Mestra das Classes]^000000";
+		mes "Vejo que você voltou, e mais forte!";
+
+		mes "Pois bem, que classe deseja seguir agora?";
+
+		next;
+
+		switch (Class)
+
+		{
+
+			case 4024:
+
+				setarray .@c[0], 4030, 4037;
+
+				break;
+
+			case 4025:
+
+				setarray .@c[0], 4032, 4039;
+
+				break;
+
+			case 4026:
+
+				if (Sex)
+
+					setarray .@c[0], 4034, 4042;
+
+				else
+
+					setarray .@c[0], 4034, 4043;
+
+				break;
+
+			case 4027:
+
+				setarray .@c[0], 4031, 4038;
+
+				break;
+
+			case 4028:
+
+				setarray .@c[0], 4033, 4041;
+
+				break;
+
+			case 4029:
+
+				setarray .@c[0], 4035, 4040;
+
+				break;
+
+		}
+
+		select (jobname(.@c[0])+"",""+jobname(.@c[1]));
+
+		callsub F_ChangeJob, set(lastjobb, .@c[@menu-1]),0;
+
+	}
+
+	else if (Class > 4007 && Class < 4022)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 70, 1;
+
+		mes "Você está a um passo das lendárias Terceiras Classes T.";
+
+		mes "E então...";
+
+		next;
+
+		callsub F_ChangeJob, .class3t[lastjob], .class3p[lastjob];
+
+	}
+
+	else if (Class > 4029 && Class < 4044)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 50, 1;
+
+		mes "Você está a um passo das lendárias Terceiras Classes Bebê";
+
+		mes "E então...";
+
+		next;
+
+		callsub F_ChangeJob, .class3b[(lastjobb-4023)], .class3p[(lastjobb-4023)];
+
+	}
+
+	else if (Class == 23 || Class == 4045)
+
+	{
+
+		callsub F_ReqBaseJobLevel, 99, 1;
+
+		mes "Você está a um passo das lendárias Terceiras Classes";
+
+		mes "E então...";
+
+		next;
+
+		callsub F_ChangeJob, (Class == 23? 4190 : 4191), 1;
+
+	
+
+	}
+
+	
+
+	F_ChangeJob:
+
+		mes "^FF1493[Mestra das Classes]^000000";
+
+		if (BaseLevel < 45 && Class != 4023 && (getarg(0) == 23 || getarg(0) == 4045))
+
+		{
+
+			mes "^FF1493[Mestra das Classes]^000000";
+			mes "Você precisa ter pelo menos Nível de Base 45 para poder mudar de classe.";
+
+			close;
+
+		}
+
+		mes "Você tem certeza que deseja se tornar "+jobname(getarg(0))+"?";
+
+		if (select ("^ff0000[ • ]^000000 Não:^0084ff[ • ]^000000 Sim") == 1)
+
+			close;
+
+		next;
+
+		jobchange getarg(0);
+
+		if(getarg(1)){
+
+			if(getarg(0) == 4190 || getarg(0) == 4191)
+
+			{
+
+				getitem 2340,1;
+
+				getitem 2522,1;
+
+			}
+
+			else if(getarg(0) >= 4054)
+
+			{
+
+				getitem getarg(1),1;
+
+				getitem 2795,1;
+
+			}
+
+			else
+
+			{
+
+				getitem getarg(1),1;
+
+			}
+
+		}
+
+		mes "^FF1493[Mestra das Classes]^000000";
+
+		mes "Parabéns, agora você é um ^0000cd"+jobname(getarg(0))+"^000000"+(getarg(1) ? " e acaba de receber um "+getitemname(getarg(1)):"")+"!";
+
+		close;
+
+	return;
+
+	
+
+	F_ReqBaseJobLevel:
+
+		if (((getarg(1))?BaseLevel:99) < 99 || JobLevel < getarg(0))
+
+		{
+			mes "Você precisa ter pelo menos "+((getarg(1,0))?"Nível de Base 99 e ":"")+"Nível de Classe "+getarg(0)+" para poder mudar de classe.";
+
+			close;
+
+		}
+
+	return;
+
+	
+
+OnInit:
+
+	setarray .class3[7],4054,4057,4055,4058,4056,4059,0,4066,4070,4067,4072,4071,4068,4069;
+
+	setarray .class3t[7],4060,4063,4061,4064,4062,4065,0,4073,4077,4074,4079,4078,4075,4076;
+
+	setarray .class3b[7],4096,4099,4097,4100,4098,4101,0,4102,4106,4103,4108,4107,4104,4105;
+
+	setarray .class3p[7],5746,5747,5753,5760,5748,5755,0,5757,5754,5756,5750,5752,5751,5758;
+
+	setarray .iniciante[1],13415,1639,1742,1545,1381,13041;
+
+	
+
+	// Coloque aqui o tipo de servidor. ( 0 - OldTimes / 1 - Transclasses / 2 - Terceiras Classes)
+
+	set .svtype,1;
+
+	
+
+	// Coloque aqui se haverá classes Baby ( 1 - Sim / 0 - Não)
+
+	set .svbaby,1;
+
+	
+
+	
+
+}

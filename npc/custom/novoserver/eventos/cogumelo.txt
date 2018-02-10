@@ -1,0 +1,67 @@
+//===== rAthena Script ======================================= 
+//= Find the Mushroom
+//===== By: ================================================== 
+//= Mysterious
+//===== Current Version: ===================================== 
+//= 3.6a
+//===== Compatible With: ===================================== 
+//= rAthena SVN
+//===== Description: ========================================= 
+//= Find the Mushroom - random amount of Mushrooms spawns in random maps.
+//= Players need to find these mushrooms and kill them to gain prizes!
+//===== Additional Comments: =================================
+//= 3.0 Fully Functional with Rewritten script. [Mysterious]
+//= 3.6a Slightly edited. [Euphy]
+//============================================================ 
+
+prontera,164,227,5	script	Ache o Cogumelo	1084,{
+	mes "[ ^008000Ache o Cogumelo^000000 ]";
+	if (!.Status)
+		mes "Não começou o evento ainda!";
+	else {
+		mes "Tem "+.Spawn+" Cogumelos faltando em "+.Map$+"!";
+		mes "Ache e mate o cogumelo para ganhar "+getitemname(.Prize)+"!";
+	}
+	if (.Status || getgmlevel() < .GM) close;
+	mes "Quer começar o evento?";
+	next;
+	if(select("[^008000»^000000] Não.:[^008000»^000000] Sim.") == 1) close;
+	donpcevent strnpcinfo(0)+"::OnMinute10";
+	mes "[ ^008000Ache o Cogumelo^000000 ]";
+	mes "Evento começou!";
+	close;
+
+OnInit:
+	set .Prize,7180;	// Reward item ID
+	set .Amount,2;	// Reward item amount
+	set .GM,60;	// GM level required to access NPC
+	setarray .Maps$[0],"alberta","geffen","morocc","prontera"; // Possible maps
+	end;
+
+OnClock0018:
+OnClock0518:
+OnClock1018:
+OnClock1518:
+OnClock2118:
+
+	if (.Status) end;
+	set .Status,1;
+	set .Spawn,rand(1,1);	// How many Mushrooms should spawn?
+	set .Map$,.Maps$[rand(getarraysize(.Maps$))];
+	killmonster .Map$,"All";
+	monster .Map$,0,0,"Por favor, não me mate!",1084,.Spawn,strnpcinfo(0)+"::OnMobKilled";
+	announce "Ache o Cogumelo: Total de "+.Spawn+" Cogumelos foram sumonados em "+.Map$+"!",0;
+	sleep 2500;
+	announce "Ache o Cogumelo: Todos Cogumelos que você matar você irá ganhar "+getitemname(.Prize)+"!",0;
+	end;
+
+OnMobKilled:
+	set .Spawn, .Spawn - 1;
+	getitem .Prize, .Amount;
+	if (.Spawn) announce "[ "+strcharinfo(0)+" ] matou um cogumelo. Agora restam "+.Spawn+" Cogumelo(s).",bc_map;
+	else {
+		announce "O evento Ache o Cogumelo terminou. Todos os cogumelos foram mortos.",0;
+		set .Status,0;
+	}
+	end;
+}

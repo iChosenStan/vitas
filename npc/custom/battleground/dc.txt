@@ -1,0 +1,25 @@
+-	script	dualclientkicker	-1,{
+OnPCLoadMapEvent:
+	set .@charmap$, strcharinfo(3);
+	if(!compare(.tmp$,.@charmap$)) end;
+	set .@len, query_sql("SELECT DISTINCT `account_id` FROM `char` WHERE `account_id` IN (SELECT `account_id` FROM `login` WHERE `last_unique_id` = (SELECT `last_unique_id` FROM `login` WHERE `account_id`="+getcharid(3)+")) AND `online` <> 0;",.@a);
+	//set .@len, query_sql("select account_id from `char` right join login on login.account_id = `char`.account_id where `char`.online = 1 and login.ip = '"+ getcharip() +"'",.@a ); //Annieruru Addition.
+	if(.@len-1) {
+		for(set(.@d,0);.@d<.@len;set(.@d,.@d+1)) {
+			getmapxy(.@map$,.@x,.@y,0,rid2name(.@a[.@d]));
+			if(.@charmap$==.@map$&&rid2name(.@a[.@d])!=strcharinfo(0)) {
+				dispbottom "Double cliente detectado vocé teleportado caso insista está sujeito a ban.";
+				warp "prontera",156,163;
+			}
+		}
+	}
+	end;
+	
+OnInit:
+	setarray   .maps$  ,	"guild_vs3", "pvp_n_1-5", "guild_vs1", "bat_c03", "bat_c02", "bat_c01", "1@lhz", "bat_room", "prt_are01", "1@lhz";
+	set        .lens   ,	getarraysize(.maps$)                                   ;
+	for(set(.a,0);.a<.lens;set(.a,.a+1)) {
+		setmapflag .maps$[.a],	mf_loadevent ;
+		set .tmp$  ,.tmp$+.maps$[.a]+",";
+	}
+}

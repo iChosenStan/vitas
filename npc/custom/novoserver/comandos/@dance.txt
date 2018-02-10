@@ -1,0 +1,23 @@
+//===== Script ===============================================
+//= Atcommand dance with easy editable options.
+//===== By: ==================================================
+//= -SkittleNugget-
+//============================================================
+
+-	script	Commands	-1,{
+
+OnInit: 
+	bindatcmd "dance",strnpcinfo(3)+"::OnDance";    //@dance
+	end;
+	
+OnDance:
+	setarray .@sounds[0], 12, 16, 18, 97, 98, 100, 108, 107, 119, 121, 130, 153;
+	setarray .@effects[0], 9, 51, 52, 70, 71, 73, 82, 133, 144, 148;
+	setarray .@moves[0], 413, 414, 415, 426, 425, 435, 466, 501, 540;
+	
+	specialeffect2 .@sounds[rand(getarraysize(.@sounds))];
+	specialeffect2 .@effects[rand(getarraysize(.@effects))];
+	specialeffect2 .@moves[rand(getarraysize(.@moves))];
+	end;
+	
+}

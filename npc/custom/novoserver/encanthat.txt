@@ -1,0 +1,38 @@
+prontera,175,200,5	script	Encantar Hats	546,{
+mes "Qual armadura você deseja encantar?";
+mes "Certifique-se de que não existe carta ou runa nele ^FF0000pois serão excluidos^000000.";
+next;
+setarray .EquipID[0],5518,18550,5451,5452,5453,5374,5423,5801,5225,5137,5376,18522,20805,20823,20824;
+for( set .@i,0; .@i < getarraysize( .EquipID ); set .@i,.@i + 1 ){
+set .@EquipMenu$,.@EquipMenu$ + getitemname( .EquipID[.@i] )+( !getitemslots(.EquipID[.@i])?"":"["+getitemslots(.EquipID[.@i])+"]" )+":";
+}
+set .@Equip,select( .@EquipMenu$ ) - 1;
+if( !countitem( .EquipID[.@Equip] ) || countitem( 674 ) < 10 ){
+mes "Você não possui este equipamento com você ou você não teve o suficiente de ^FF000010^000000 "+getitemname( 674 );
+close;
+}
+mes "Equipmento : ^FF0000"+getitemname( .EquipID[.@Equip] )+"^000000";
+switch( select( "[ ^FF0000•^000000 ] STR + ^FF00001^000000:[ ^FF0000•^000000 ] INT   + ^FF00001^000000:[ ^FF0000•^000000 ] DEX + ^FF00001^000000:[ ^FF0000•^000000 ] AGI   + ^FF00001^000000:[ ^FF0000•^000000 ] VIT   + ^FF00001^000000:[ ^FF0000•^000000 ] LUK + ^FF00001^000000" )){
+Case 1: setarray .RuneID[0],4700; break;
+Case 2: setarray .RuneID[0],4710; break;
+Case 3: setarray .RuneID[0],4720; break;
+Case 4: setarray .RuneID[0],4730; break;
+Case 5: setarray .RuneID[0],4740; break;
+Case 6: setarray .RuneID[0],4750; break;
+}
+for( set .@i,0; .@i < getarraysize( .RuneID ); set .@i,.@i + 1 ){
+set .@RuneMenu$,.@RuneMenu$ + getitemname( .RuneID[.@i] )+":";
+}
+set .@Rune,select( .@RuneMenu$ ) - 1;
+mes "Tipo de runa : ^FF0000"+getitemname( .RuneID[.@Rune] )+"^000000";
+next;
+if( select("Confirma:Cancelar") == 1 ){
+delitem .EquipID[.@Equip],1;
+delitem 674,10;
+getitem2 .EquipID[.@Equip],1,1,0,0,0,0,0,.RuneID[.@Rune];
+mes "Done.";
+mes "^0000FF"+getitemname( .EquipID[.@Equip] )+"^000000";
+mes "Encantar com ^FF0000"+getitemname( .RuneID[.@Rune] )+"^000000";
+}
+close;
+}

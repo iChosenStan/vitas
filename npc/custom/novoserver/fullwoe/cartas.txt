@@ -1,0 +1,208 @@
+// Settings :
+//	-	Only required to edit the ShopSetting() Function
+//			Notes : You may also add / remove Menu ( If any ) 
+//	-	Shop Currency can be either ItemID or Variable Name, but must write within Quotation Marks ( "" )
+//			Ex. of Variable.	->	Zeny , #CASHPOINTS , #KAFRAPOINTS , CustomVariable , #CustomVariable
+//	-	ERROR Message are used to show Invalid Settings in your NPC.
+
+
+// Leave this alone...
+-	shop	Emistry_Shop	-1,512:100
+
+
+prontera,164,165,3	script	Cartas	958,{
+function ShopSettings;
+function ValidateCost;
+function CurrencyInfo;
+function ClearData;
+function ValueConvert;
+function ErrorNotice;
+
+//mes "Each Shop from the Menu may purchase using ^FF0000Different Currency^000000.";
+//mes "^00FF00____________________________^000000";
+//mes "So,Which shop you would like to look at it";
+//next;
+// Menu Selection
+select("Cabeça","Esculdo","Armadura","Acessorio","Armas","Sapato","Capa","Especiais");
+
+ClearData();
+ShopSettings( @menu );
+npcshopitem "Emistry_Shop",512,100;
+npcshopdelitem "Emistry_Shop",512;
+for(set .@i,0; .@i < getarraysize( @ItemLists ); set .@i,.@i+1)
+	npcshopadditem "Emistry_Shop",@ItemLists[.@i],@ItemCost[.@i];
+callshop "Emistry_Shop",1;
+npcshopattach "Emistry_Shop";
+end;
+
+
+function	ShopSettings	{
+	switch( getarg(0) ){
+		Case 1:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4127,4358,4379,4288,4229,4041,4296,4122,4052,4258,4354,4110,4271,4278,4087,4161,4343,4269,4195,4112,4336,4010,4366,4223,4411,4412,4434,4438;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;
+			break;
+		Case 2:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4414,4253,4032,4248,4013,4138,4240,4075,4074,4217,4250,4439,4322,4413,4045,4231,4136,4124,4067,4090,4420,4207,4066,4309,4314,4083,4414,4120,4059,4304,4340,4397,4058,4012,4254,4277,4413,4420,4439;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;
+			break;
+		Case 3:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4409,4401,4400,4387,4234,4243,4242,4371,4114,4023,4233,4119,4213,4426,4300,4299,4061,4298,4170,4173,4370,4181,4098,4279,4410,4346,4141,4405,4280,4270,4150,4162,4301,4295,4191,4201,4105,4166,4339,4392,4338,4099,4031,4315,4008,4011,4337,4001,4003,4383,4353,4021,4014,4194,4101,4216,4078,4393,4222,4404,4158,4220,4218,4089,4016,4369,4333,4332,4259,4189,4382,4409,4410,4426;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;
+			break;
+		Case 4:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4238,4237,4044,4028,4348,4040,4103,4027,4079,4093,4077,4053,4064,4022,4084,4175,4252,4415,4418,4423,4424,4436,4437,4433,4416;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;
+			break;
+		Case 5:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4140,4126,4316,4069,4202,4055,4255,4055,4024,4281,4043,4082,4004,4251,4002,4035,4085,4172,4246,4345,4086,4092,4106,4362,4440,4421,4427,4428,4297,4341;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;
+			break;
+		Case 6:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4200,4396,4100,4097,4244,4245,4249,4009,4235,4267,4160,4319,4378,4381,4417,4050,4107,4381,4435,4199;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;	
+			break;
+		Case 7:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4402,4129,4285,4015,4179,4178,4266,4088,4303,4325,4081,4328,4116,4109,4287,4431,4351,4432,4113,4095,4108,4159,4334,4375,4071,4313,4133,4422,4429,4183,4211,4210,4102,4056,4422,4429,4431,4432,4368;
+			// Item Price
+			setarray @ItemCost[0],100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100,100;
+			break;
+		Case 8:
+			// Currency [ Item ID / Variable Name ]
+			set @Currency$,"Zeny";
+			// Item ID Lists
+			setarray @ItemLists[0],4429,4354,4452;
+			// Item Price
+			setarray @ItemCost[0],100,100,100;
+			break;
+		// Case 4,5,6.....etc...
+		default:
+			ErrorNotice( "Invalid Menu Selection for Menu "+@menu+"." );
+			close;
+	}
+	
+	
+if( @Currency$ == "" )
+	ErrorNotice( "Invalid Currency Setting in Menu "+@menu+" ." );
+if( getarraysize( @ItemCost ) != getarraysize( @ItemLists ) || getarraysize( @ItemLists ) != getarraysize( @ItemCost ) )
+	ErrorNotice( "Missing or Extra Value of Item or Cost Settings in Menu "+@menu+" ." );
+return;
+}
+
+function	ErrorNotice	{
+	mes "^FF0000ERROR^000000 - "+getarg(0);
+	mes "^00FF00____________________________^000000";
+	mes "Inform this Message to ^0000FFGame Staffs^000000 immediately !";
+	close;
+}
+
+function	CurrencyInfo	{
+	if( getitemname( atoi( getarg(0) ) ) != "null" ){
+		mes "Item Currency : ^FF0000"+getitemname( atoi( getarg(0) ) )+"^000000";
+		mes "Available Amount : ^0000FF"+ValueConvert( countitem( atoi( getarg(0) ) ) )+"^000000";
+	}else if( getitemname( atoi( getarg(0) ) ) == "null" ){
+		mes "Variable Currency : ^FF0000"+getarg(0)+"^000000";
+		mes "Available Amount : ^0000FF"+ValueConvert( getd( getarg(0) ) )+"^000000";
+	}
+return;
+}
+
+function	ValidateCost	{
+	if( getitemname( atoi( getarg(0) ) ) != "null" ){
+		if( countitem( atoi( getarg(0) ) ) < getarg(1) ) return 1;
+	}else{
+		if( getd( getarg(0) ) < getarg(1) ) return 1;
+	}
+return 0;
+}
+
+function ClearData	{
+	set @Currency$,"";
+	set @TotalCost,0;
+	deletearray @bought_nameid[0],getarraysize( @bought_nameid );
+	deletearray @bought_quantity[0],getarraysize( @bought_quantity );
+	deletearray @ItemLists[0],getarraysize( @ItemLists );
+	deletearray @ItemCost[0],getarraysize( @ItemCost );
+return;
+}
+
+function	ValueConvert	{
+	set .@num, atoi(""+getarg(0));
+	if ( .@num == 0 || .@num >= 2147483647 ) return getarg(0);
+	set .@l, getstrlen(""+.@num);
+	for ( set .@i,0; .@i < .@l; set .@i, .@i + 1 ) {
+		set .@num$, .@num % pow(10,.@i+1) / pow(10,.@i) + .@num$;
+			if ( (.@i+1) % 3 == 0 && .@i+1 != .@l ) set .@num$, ","+ .@num$;
+	}
+	return .@num$;
+}
+
+OnBuyItem:
+	ShopSettings( @menu );
+	for(set @i,0; @i < getarraysize( @bought_nameid ); set @i,@i+1)
+		for(set @j,0; @j < getarraysize( @ItemLists ); set @j,@j+1)
+			if( @ItemLists[@j] == @bought_nameid[@i] )
+			set @TotalCost,@TotalCost + ( @ItemCost[@j] * @bought_quantity[@i] );
+	mes "^FF0000       Lista de Compras^000000";
+	mes "^00FF00____________________________^000000";
+	for( set @i,0; @i < getarraysize( @bought_nameid ); set @i,@i+1 )
+			mes "^FF0000"+@bought_quantity[@i]+" x ^0000FF"+getitemname( @bought_nameid[@i] )+"^000000";
+	mes "^00FF00____________________________^000000";
+
+	if( getitemname( atoi( @Currency$ ) ) != "null" )
+		mes "Custo total : ^0000FF"+ValueConvert( @TotalCost )+" x "+getitemname( atoi( @Currency$ ) )+"^000000";
+	else if( getitemname( atoi( @Currency$ ) ) == "null" ){
+		mes "Custo total : ^0000FF"+ValueConvert( @TotalCost )+" "+@Currency$+"^000000";
+	}
+	
+	mes "^00FF00____________________________^000000";
+	if( ValidateCost( @Currency$,@TotalCost ) ){
+		if( getitemname( atoi( @Currency$ ) ) != "null" )
+			mes "[ ^FF0000X^000000 ] Insufficient ^0000FF"+getitemname( atoi( @Currency$ ) )+"^000000";
+		else{
+			mes "[ ^FF0000X^000000 ] Insufficient ^0000FF"+@Currency$+"^000000";
+		}
+	}else{
+		if( select( "^0000FFComprar^000000:Cancelar" ) == 1 ){
+			if( getitemname( atoi( @Currency$ ) ) != "null" )
+				delitem atoi( @Currency$ ),@TotalCost;
+			else{
+				set getd( @Currency$ ),getd( @Currency$ ) - @TotalCost;
+			}
+			for(set @i,0; @i < getarraysize( @bought_nameid ); set @i,@i+1)
+				getitem @bought_nameid[@i],@bought_quantity[@i];
+			message strcharinfo(0),"Comprar "+getarraysize( @bought_nameid )+" Items.";
+			mes "Obrigado bom proveito att mega-ro";
+		}
+	}
+ClearData();
+close;
+
+}

@@ -1,0 +1,50 @@
+// ========================================================== //
+//         __  __ _____ _    _          ______ _              //
+//        |  \/  |_   _| |  | |   /\   |  ____| |             //
+//        | \  / | | | | |__| |  /  \  | |__  | |             //
+//        | |\/| | | | |  __  | / /\ \ |  __| | |             //
+//        | |  | |_| |_| |  | |/ ____ \| |____| |____         //
+//        |_|  |_|_____|_|  |_/_/    \_\______|______|        //
+//                 forum.brathena.org                         //
+//                                                            //
+// ===================== Licença ============================ //
+//     Esta script está protegida por uma licença Creative    //
+//          Commons Atribuido ao Uso-Não-Comercial            //
+//                      Compartilhado                         //
+// ========================================================== //
+// Nome:	Anunciador                                        //
+// ========================================================== //
+// Autor:	Mihael                                            //
+// ========================================================== //
+// Versão:	1.2                                               //
+// ========================================================== //
+// Descrição:	Um npc feito para mandar mensagens sensacio   //
+//                nalistas dentro do seu servidor.            //
+// ========================================================== //
+// Comentários Adicionais:	Favor manter os créditos pois     //
+//                          da trabalho para fazer.           //
+// ========================================================== //
+// Change Log:                                                //
+//		1.0 - Script criado.                    [Mihael]      //
+//		1.1 - Script Otimizado.                  [Orce]       //
+//		1.2 - Add rand de cores nos anuncios.    [Orce]       //
+// ========================================================== //
+
+-	script	News	-1,{
+// Timer 1 em 1 hora.
+OnMinute30:
+	setarray .cores$[0],"0x99CC00","0x00FFFF","0xFFCC99","0xCCFFFF","0xFFFFFF","0xCC99FF","0xFF0000","0xADD8E6"; // Cores dos Anuncios
+	setarray .News$[0],	// Random Mensagens
+		"[ Two Ragnarok Online ] : Nós da staff agradecemos a sua presença em nosso Servidor !",
+		"[ Two Ragnarok Online ] : Nós da staff nunca pediremos seu login ou senha, fique atento !",
+		"[ Two Ragnarok Online ] : Não passe seu login ou senha para ninguém, fique seguro.",
+		"[ Two Ragnarok Online ] : Os vencedores do TOP Ranking PVP ganharão 30k de Rops no Final de cada Mês !",
+		"[ Two Ragnarok Online ] : Eventos serão realizados pela staff todos os Domingos !",
+		"[ Two Ragnarok Online ] : Vote e ajude o servidor a sempre está melhorando !",
+		"[ Two Ragnarok Online ] : Fique ligado em nossa comunidade online... www.ragnatwo.com/forum ~ !";
+		
+	announce .News$[ rand( getarraysize( .News$ ) ) ],bc_all,.cores$[ rand( getarraysize( .cores$ ) ) ]; // Anuncio.
+	end;
+} 
+
+ 

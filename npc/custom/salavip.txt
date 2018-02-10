@@ -1,0 +1,422 @@
+//  _______________________________________________________
+// /                                                       \
+// |       _           _   _   _                            |
+// |      | |__  _ __ / \ | |_| |__   ___ _ __   __ _       |
+// |      | '_ \| '__/ _ \| __| '_ \ / _ \ '_ \ / _` |      |
+// |      | |_) | | / ___ \ |_| | | |  __/ | | | (_| |      |
+// |      |_.__/|_|/_/   \_\__|_| |_|\___|_| |_|\__,_|      |
+// |                                                        |
+// |                 brAthena Script                        |
+// |--------------------------------------------------------|
+// | Nome do Script: Removedora de cartas                   |
+// |--------------------------------------------------------|
+// | Criado por: Henrique (lockershak / Hold)               |
+// |--------------------------------------------------------|
+// | Versões eA/brA: todas/todas                            |
+// |--------------------------------------------------------|
+// | Descrição: Removedora de cartas com informações sobre  |
+// | cada equipamento.                                      |
+// |--------------------------------------------------------|
+// | Changelog:                                             |
+// | - 1.0: Versão inicial do NPC criada                    |
+// \_______________________________________________________/
+
+sec_in01,80,178,4	script	Removedora de Cartas	66,{
+
+//==============================================================
+//= Configurações do NPC
+//==============================================================
+
+	set .npcname$, "[ ^0000FFRemovedora^000000 ]"; //Nome do NPC, o nome que irá aparecer nas falas
+
+	set .zeny_needed, 100000; //Quantidade de zeny que será cobrada do jogador
+
+	set .gmlvl_needed, 0; //Nível mínimo de GM para utilizar o NPC
+	
+//==============================================================
+//==============================================================
+	
+	setarray @item_id[1],getequipid (1),getequipid (2),getequipid (3),getequipid (4),getequipid (5),getequipid (6),getequipid (7),getequipid (8),getequipid (9),getequipid (10);
+	setarray @item_refine[1],getequiprefinerycnt (1),getequiprefinerycnt (2),getequiprefinerycnt (3),getequiprefinerycnt (4),getequiprefinerycnt (5),getequiprefinerycnt (6),getequiprefinerycnt (7),getequiprefinerycnt (8),getequiprefinerycnt (9),getequiprefinerycnt (10);
+	setarray @item_slotcnt[1],getitemslots(@item_id[1]),getitemslots(@item_id[2]),getitemslots(@item_id[3]),getitemslots(@item_id[4]),getitemslots(@item_id[5]),getitemslots(@item_id[6]),getitemslots(@item_id[7]),getitemslots(@item_id[8]),getitemslots(@item_id[9]),getitemslots(@item_id[10]);
+	setarray @item_name$[1],"+"+@item_refine[1]+" "+getequipname (1)+" ["+@item_slotcnt[1]+"]","+"+@item_refine[2]+" "+getequipname (2)+" ["+@item_slotcnt[2]+"]","+"+@item_refine[3]+" "+getequipname (3)+" ["+@item_slotcnt[3]+"]","+"+@item_refine[4]+" "+getequipname (4)+" ["+@item_slotcnt[4]+"]","+"+@item_refine[5]+" "+getequipname (5)+" ["+@item_slotcnt[5]+"]","+"+@item_refine[6]+" "+getequipname (6)+" ["+@item_slotcnt[6]+"]","+"+@item_refine[7]+" "+getequipname (7)+" ["+@item_slotcnt[7]+"]","+"+@item_refine[8]+" "+getequipname (8)+" ["+@item_slotcnt[8]+"]","+"+@item_refine[9]+" "+getequipname (9)+" ["+@item_slotcnt[9]+"]","+"+@item_refine[10]+" "+getequipname (10)+" ["+@item_slotcnt[10]+"]";
+	setarray @item_name2$[1],getequipname (1)+" ["+@item_slotcnt[1]+"]",getequipname (2)+" ["+@item_slotcnt[2]+"]",getequipname (3)+" ["+@item_slotcnt[3]+"]",getequipname (4)+" ["+@item_slotcnt[4]+"]",getequipname (5)+" ["+@item_slotcnt[5]+"]",getequipname (6)+" ["+@item_slotcnt[6]+"]",getequipname (7)+" ["+@item_slotcnt[7]+"]",getequipname (8)+" ["+@item_slotcnt[8]+"]",getequipname (9)+" ["+@item_slotcnt[9]+"]",getequipname (10)+" ["+@item_slotcnt[10]+"]";
+	setarray @item_cardcnt[1],getequipcardcnt (1),getequipcardcnt (2),getequipcardcnt (3),getequipcardcnt (4),getequipcardcnt (5),getequipcardcnt (6),getequipcardcnt (7),getequipcardcnt (8),getequipcardcnt (9),getequipcardcnt (10);
+	
+	set @loops, 1;
+	while (@loops < getarraysize (@item_name$)) {
+		if (@item_name$[@loops] == "+0 -1 [0]" || @item_cardcnt[@loops] == 0) {
+			setarray @item_name$[@loops], "";
+		}
+		set @loops, @loops+1;
+	}
+	
+	if (readparam(20) < .zeny_needed) { goto havenozeny; }
+	if (getgroupid () < .gmlvl_needed) { goto arentvip; }
+	
+	intro: {
+		mes .npcname$;
+		mes "Olá, eu sou a especialista em lidar com equipamentos que foram encantados com cartas, eu posso remover quaisquer cartas que estiverem contidas neles, gostaria de experimentar?";
+		next;
+		if (select ("- Sim.:- Não, agora não.") == 1) {
+			if (@item_name$[1] == "" && @item_name$[2] == "" && @item_name$[3] == "" && @item_name$[4] == "" && @item_name$[5] == "" && @item_name$[6] == "" && @item_name$[7] == "" && @item_name$[8] == "" && @item_name$[9] == "" && @item_name$[10] == "") {
+				goto noitemstoremove;
+			} else {
+				goto item_list;
+			}
+		} else {
+			goto _end;
+		}
+	}
+	
+	item_list: {
+		mes .npcname$;
+		mes "Escolha com qual dos items abaixo você quer realizar o processo de remoção.";
+		next;
+		menu @item_name$[1],item_1,@item_name$[2],item_2,@item_name$[3],item_3,@item_name$[4],item_4,@item_name$[5],item_5,@item_name$[6],item_6,@item_name$[7],item_7,@item_name$[8],item_8,@item_name$[9],item_9,@item_name$[10],item_10,"Nenhum.",_end;
+	
+		item_1: {
+			set @item_arrayid, 1;
+			goto remove_cards;
+		}
+		item_2: {
+			set @item_arrayid, 2;
+			goto remove_cards;
+		}
+		item_3: {
+			set @item_arrayid, 3;
+			goto remove_cards;
+		}
+		item_4: {
+			set @item_arrayid, 4;
+			goto remove_cards;
+		}
+		item_5: {
+			set @item_arrayid, 5;
+			goto remove_cards;
+		}
+		item_6: {
+			set @item_arrayid, 6;
+			goto remove_cards;
+		}
+		item_7: {
+			set @item_arrayid, 7;
+			goto remove_cards;
+		}
+		item_8: {
+			set @item_arrayid, 8;
+			goto remove_cards;
+		}
+		item_9: {
+			set @item_arrayid, 9;
+			goto remove_cards;
+		}
+		item_10: {
+			set @item_arrayid, 10;
+			goto remove_cards;
+		}
+	}
+	
+	remove_cards: {
+		setarray @cards_id[1],getequipcardid (@item_arrayid,0),getequipcardid (@item_arrayid,1),getequipcardid (@item_arrayid,2),getequipcardid (@item_arrayid,3);
+		set @item_refine, getequiprefinerycnt (@item_arrayid);
+		mes .npcname$;
+		mes "Você escolheu ^FF0000"+@item_name2$[@item_arrayid]+"^000000, podemos prosseguir?";
+		mes "^FF6C00>> Informações do Equipamento << ^000000";
+		mes "Refinamento: ^FF0000+"+@item_refine+"^000000.";
+		set @slots, 1;
+		while (@slots <= @item_cardcnt[@item_arrayid]) {
+			mes "["+@slots+"]: ^FF0000"+getitemname(@cards_id[@slots])+"^000000.";
+			set @slots, @slots+1;
+		}
+		next;
+		if (select ("- Sim.:- Não.") == 2) {
+			mes .npcname$;
+			mes "O que deseja fazer?";
+			next;
+			if (select ("- Escolher outro item.:- Sair.") == 1) {
+				goto item_list;
+			} else {
+				goto _end;
+			}
+		} else {
+			if (getequipisequiped(@item_arrayid) == 1) {
+				set Zeny, Zeny - .zeny_needed;
+				successremovecards @item_arrayid;
+				specialeffect2 154,strcharinfo(0);
+			} else {
+				goto espertinho;
+			}
+		}
+	}
+	
+//==============================================================
+//= Eventos gerais
+//==============================================================
+	
+	havenozeny: {
+		mes .npcname$;
+		mes "Você não possui Zenys suficientes para utilizar meus serviços.";
+		close;
+	}
+	
+	arentvip: {
+		mes .npcname$;
+		mes "Você não é um jogador VIP.";
+		close;
+	}
+	
+	noitemstoremove: {
+		mes .npcname$;
+		mes "Desculpe, mas você não possui nenhum equipamento com cartas.";
+		close;
+	}
+	
+	_end: {
+		mes .npcname$;
+		mes "Ok, volte quando quiser.";
+		close;
+	}
+	
+	espertinho: {
+		mes .npcname$;
+		mes "haha... você tentou me passar a perna mas não conseguiu, sou uma aventureira experiente, tente seus truques com outros não comigo.";
+		close;
+	}
+}
+//==============================================================
+//= Fim
+//==============================================================
+
+sec_in01,91,178,4	script	Cirurgião	402,{
+
+//if (getgroupid()<1) goto naovip;
+ 
+if (#cirurgia == 1) {
+if(Class == 19 || Class == 20 || Class == 4020 || Class == 4021) {
+ 
+	mes "[Cirurgião]";
+	mes "Você deve ter vindo aqui para recuperar suas habilidades...";
+	mes "quer recuperar suas habilidades?";
+	menu "Sim",-,"Não",queronao;
+ 
+	mes "[Cirurgião]";
+	mes "Pronto todas as suas habilidades estão de volta.";
+	set #cirurgia,0;
+	atcommand "@allskills";
+	close;
+ 
+	queronao:
+	mes "[Cirurgião]";
+	mes "Esta bem então.";
+	close;
+}
+ 
+}
+	mes "[Cirurgião]";
+	mes "Olá, "+StrCharInfo(0);
+	mes "Tento conseguir alegrar mais as pessoas que estão infelizes com seu corpo...";
+	mes "Estou aqui para ser voluntário a fazer cirurgias pra mudança de sexo das pessoas.";
+	mes "Com isso possa ser que elas fiquem mais felizes...";
+	next;
+	mes "[Cirurgião]";
+	mes "Bom o que você me diz...";
+	mes "quer fazer a cirurgia?";
+	menu "Sim",-,"Não",naoquero;
+ 
+if(Class == 19 || Class == 20 || Class == 4020 || Class == 4021) {
+ 
+	mes "[Cirurgião]";
+	mes "Desculpe-me, mas não posso fazer uma Cirurgia em você.";
+	close;
+ 
+}
+ 
+	mes "[Cirurgião]";
+	mes "Então vamos começar...";
+	mes "Lembre-se se você tiver um Bardo/Menestrel ou Cigana/Odalisca...";
+	mes "volte a falar comigo para recuperar seus pontos de job.";
+	next;
+	mes "[Cirurgião]";
+	mes "Então vamos lá...";
+	next;
+	mes "[Cirurgião]";
+	mes "Agulha... Bisturi...";
+	next;
+	mes "Algumas horas depois...";
+	next;
+	mes "[Cirurgião]";
+	mes "Pronto, sua cirurgia foi um sucesso.";
+	mes "sempre que precisarem de mim estarei aqui.";
+	next;
+	set #cirurgia,1;
+	atcommand "@changesex";
+	close;
+ 
+	naoquero:
+	mes "[Cirurgião]";
+	mes "Ta ok, se mudar de ideia estarei a disposição.";
+	close;
+//naovip:
+//show "Me desculpe, você não é um jogador VIP";
+//close;
+}
+
+sec_in01,95,172,5	script	Elemental	719,{
+
+set .price,5000;
+mes "[ Element Changer ]";
+mes "Você deseja encantar sua arma com algum elemento por apenas "+ .price +" Zeny?";
+next;
+if(select("Seria ótimo.","Não, obrigado.")==2) close;
+if( zeny < .price ){ mes "Você não possui Zeny o suficiente!"; close;}
+
+mes "Escolha qual elemento você deseja que sua arma seja encantada:";
+next;
+switch(select("Fogo:Água:Terra:Vento:Sagrado:Sombrio")) {
+	case 1: sc_start sc_fireweapon,1800000,1; break;
+	case 2: sc_start sc_waterweapon,1800000,1; break;
+	case 3: sc_start sc_earthweapon,1800000,1; break;
+	case 4: sc_start sc_windweapon,1800000,1; break;
+	case 5: sc_start sc_aspersio,1800000,1; break;
+	case 6: sc_start sc_shadowweapon,1800000,1; break; }
+set zeny,zeny - .price;
+mes "Sua arma foi encantada com sucesso!!";
+mes "Volte quando precisar!!";
+close;
+
+}
+
+
+sec_in01,76,163,4	shop	Vendedora De Utilidades#1	862,657:3000,656:1500,645:800,522:5500,505:5000,547:-1,717:600,716:600,715:600,1025:-1,533:900,578:500,504:1200,503:550,502:200,501:50,506:40,525:500,602:300,601:60,611:40,1065:100
+sec_in01,81,159,4	shop	Vendedor De Flechas	727, 1750:-1,1751:-1,1766:-1,1752:-1,1753:-1,1754:-1,1755:-1,1756:-1,1757:-1,1758:-1,1759:-1,1760:-1,1761:-1,1762:-1,1763:-1,1764:-1,1765:-1,1767:-1,1768:-1,1769:-1,1770:-1
+
+sec_in01,95,163,5	script	Torpedo	754,{
+
+//> Início das Configurações
+		// Observações: As cores das mensagens podem ser aleradas nas linhas:
+		//
+		// "DelayAnnounce("Mensagem","Torpedo","0xFFFF00");"
+		//
+		// Onde "0xFFFF00" será a cor delimitada.
+		
+		// Opções de menu, coloque 1 para habilitar menus de 'torpedo(normal), compra, venda, troca.
+		set .Opt,1;
+
+		// Palavras bloqueadas.
+		setarray .palavras$[1],"coloque","as","palavras","aqui"; //Coloque aqui as palavras bloqueadas, cada uma dentro das aspas.
+		
+		// Configuração do Tempo de Delay. (Padrão: 1 minuto)
+		set .DelayAnn,05;
+
+		// Configuração Zenys (Padrão: 200.000z)
+		set .Zeny,2000000;
+
+		// Nível de BASE mínimo para uso do NPC. (Padrão: 40)
+		set .LevelUser,0;
+
+//> Início do Script
+	function DelayAnnounce;
+	if(!DelayAnnounce("DelayGet",getcharid(3),.DelayAnn))
+	{
+		mes "[Anunciador]";
+		mes "Desculpe, mas você deve esperar ^FF0000"+.DelayAnn+"^000000 minuto(s) para poder enviar outro torpedo.";
+		close;
+	}
+
+	mes "[Anunciador]";
+	mes "Olá "+strcharinfo(0)+", deseja enviar uma mensagem?";
+	mes "Total enviados: ^0000FF"+#envio+"^000000";
+	if (.DelayAnn > 0) { mes "Delay: ^0000FF"+.DelayAnn+" minutos.^000000"; }
+	if (.Zeny > 0) { mes "Valor: ^0000FF"+.Zeny+"z^000000"; }
+	if(select("Sim:Não") == 2) close;
+	
+	if(.Opt == 1)
+	{
+		switch(select("Torpedo","Venda","Compra","Troca"))
+		{
+		case 1:
+			DelayAnnounce("Mensagem","Torpedo","0xFFFF00");
+		case 2:
+			DelayAnnounce("Mensagem","vender","0x00BFFF");
+		case 3:
+			DelayAnnounce("Mensagem","comprar","0x00CD00");
+		case 4:
+			DelayAnnounce("Mensagem","trocar","0xFF0000");
+		}
+	} else { DelayAnnounce("Mensagem","Torpedo","0xFFFF00"); }
+	
+function	DelayAnnounce	{
+
+	if( GetArg(0) == "DelaySet" )
+	{
+		setd "$anndelay_"+GetArg(1),gettime(4)*24*60 + gettime(6)*60 + gettime(2);
+		return 0;
+	}
+	
+	else
+	
+	if( GetArg(0) == "DelayGet" )
+	{
+		set .@check, gettime(4)*24*60 + gettime(6)*60 + gettime(2) - getd("$anndelay_"+GetArg(1));
+		return !(.@check >= 0 && .@check < GetArg(2) );
+	}
+	
+	if( GetArg(0) == "Mensagem" )
+	{
+	next;
+	Restart:
+	mes "[Anunciador]";
+	mes "Muito bem, digite a sua mensagem:";
+	mes " ";
+	mes "Digite 'fechar' para sair.";
+	input @msg$;
+	if(@msg$ == "fechar") { close; }
+	next;
+
+	if(Zeny < .Zeny)
+	{
+		mes "[Anunciador]";
+		mes "Me desculpe mas você não tem";
+		mes "zenys suficientes para usar";
+		mes "o serviço de torpedos.";
+		next;
+		mes "[Anunciador]";
+		mes "Você irá precisar de ^FF0000"+.Zeny+"z^000000.";
+		close;
+	}
+
+	if(BaseLevel < .LevelUser)
+	{
+		mes "[Anunciador]";
+		mes "Me desculpe mais por";
+		mes "questões de segurança,";
+		mes "você precisa ter o level";
+		mes "maior que ^FF0000"+.LevelUser+"^000000.";
+		close;
+	}
+
+	for(set .@i,1; .@i < getarraysize(.palavras$); set .@i,.@i+1)
+	{
+		if(compare(@msg$,.palavras$[.@i]))
+		{
+			mes "[Anunciador]";
+			mes "Desculpe, mais não é permitido palavrões no anuncio.";
+			close;
+		}
+	}
+	mes "[Anunciador]";
+	mes "Você digitou:";
+	mes "'^FF0000"+@msg$+"^000000'";
+	if(select("Correto!","Não, está errado...") == 2) { close2;	goto Restart; }
+	if(getarg(1) != "Torpedo") { announce "["+strcharInfo(0)+"] quer "+getarg(1)+": "+@msg$+".",bc_all,getarg(2); } else { announce "["+strcharInfo(0)+"](Torpedo) disse: "+@msg$+".",bc_all,getarg(2); }
+	; }
+	DelayAnnounce("DelaySet",getcharid(3));
+	if (.Zeny > 0) { set Zeny,Zeny-.Zeny; }
+	set #envio,#envio+1;
+	close;
+	}
+}
+
+
+prontera,164,174,3	script	Entrada Vip	902,{if (getgroupid() < 1) goto sair;warp "sec_in01",86,168 ;end;sair:close;

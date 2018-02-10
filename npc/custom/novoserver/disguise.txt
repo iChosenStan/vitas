@@ -1,0 +1,110 @@
+//####################################################
+//#   						   ™ #
+//#   ####### ######  ###   ### ###   ### ###   ###  #
+//#   ###    ###  ###  ### ###   ### ###   ### ###   #
+//#   #####  ###  ###   ####      ####      #####    #
+//#   ##     ###  ###  ### ###   ### ###     ###     #
+//#   ##      ######  ###   ### ###   ###   ###      #
+//#                                                  #
+//####################################################
+//v1.0: Allows changing suits to 3rd classes;        #
+//v1.1: Added Xmas and Summer suits;                 #
+//v1.2: Added support to baby 3rd class suits.       #
+//####################################################
+prontera,164,169,3	script	Roupas Custom	586,{
+
+// Settings
+	set .mode, 1; // Set it as following: 0 - Transcendent 2nd to 3rd class suits ; 1 - Transcendent 2nd to normal and baby 3rd class, also 3rd to baby 3rd; 2 - Transcendent 2nd to 3rd class suits and xmas, summer suits; 3 - 2nd to normal and baby 3rd class, also normal 3rd to baby 3rd plus xmas,summer.
+
+	if (.mode == 0) goto normal;
+	if (.mode == 1) goto babies;
+	if (.mode == 2) goto misc;
+	if (.mode == 3) goto babymisc;
+
+normal:
+	mes "[Provador de Roupa]";
+	mes "Então, quer mudar sua aparência?";
+	menu "[ ^FF0000•^000000 ] Trocar Para Classes 3RD ",thirdclass,"[ ^FF0000•^000000 ] Resetar Aparência",reset;
+
+babies:
+	mes "[Provador de Roupa]";
+	mes "Então, quer mudar sua aparência?";
+	menu "[ ^FF0000•^000000 ] Trocar Para Classes 3RD ",thirdclass,"[ ^FF0000•^000000 ] Trocar Para Classes Baby 3RD",babythirdclass,"[ ^FF0000•^000000 ] Resetar Aparência",reset;
+
+misc:
+	mes "[Provador de Roupa]";
+	mes "Então, quer mudar sua aparência?";
+	menu "[ ^FF0000•^000000 ] Trocar Para Classes 3RD",thirdclass,"Ropa Extra",miscsuits,"[ ^FF0000•^000000 ] Resetar Aparência",reset;
+
+babymisc:
+	mes "[Provador de Roupa]";
+	mes "Então, quer mudar sua aparência?";
+	menu "[ ^FF0000•^000000 ] Trocar Para Classes 3RD",thirdclass,"[ ^FF0000•^000000 ] Trocar Para Classes Baby 3RD",babythirdclass,"Ropa Extra",miscsuits,"[ ^FF0000•^000000 ] Resetar Aparência",reset;
+
+thirdclass:
+	if(class == Job_Lord_Knight) { changebase 4060; close; end; }
+	if(class == Job_Assassin_Cross) { changebase 4065; close; end; }
+	if(class == Job_Paladin) { changebase 4073; close; end; }
+	if(class == Job_Whitesmith) { changebase 4064; close; end; }
+	if(class == Job_Creator) { changebase 4078; close; end; }
+	if(class == Job_Stalker) { changebase 4079; close; end; }
+	if(class == Job_Professor) { changebase 4074; close; end; }
+	if(class == Job_Gypsy) { changebase 4076; close; end; }
+	if(class == Job_Champion) { changebase 4077; close; end; }
+	if(class == Job_Sniper) { changebase 4062; close; end; }
+	if(class == Job_Clown) { changebase 4075; close; end; }
+	if(class == Job_High_Wizard) { changebase 4061; close; end; }
+	if(class == Job_High_Priest) { changebase 4063; close; end; }
+	else { next; mes "[Provador de Roupa]"; mes "I'm sorry, but your class is not supported."; close; end; }
+
+babythirdclass:
+	if(class == Job_Lord_Knight) { changebase 4096; close; end; }
+	if(class == Job_Assassin_Cross) { changebase 4101; close; end; }
+	if(class == Job_Paladin) { changebase 4102; close; end; }
+	if(class == Job_Whitesmith) { changebase 4100; close; end; }
+	if(class == Job_Creator) { changebase 4107; close; end; }
+	if(class == Job_Stalker) { changebase 4108; close; end; }
+	if(class == Job_Professor) { changebase 4103; close; end; }
+	if(class == Job_Gypsy) { changebase 4105; close; end; }
+	if(class == Job_Champion) { changebase 4106; close; end; }
+	if(class == Job_Sniper) { changebase 4098; close; end; }
+	if(class == Job_Clown) { changebase 4104; close; end; }
+	if(class == Job_High_Wizard) { changebase 4097; close; end; }
+	if(class == Job_High_Priest) { changebase 4099; close; end; }
+	if(class == Job_Rune_Knight_T) { changebase 4096; close; end; }
+	if(class == Job_Guillotine_Cross_T) { changebase 4101; close; end; }
+	if(class == Job_Royal_Guard_T) { changebase 4102; close; end; }
+	if(class == Job_Mechanic_T) { changebase 4100; close; end; }
+	if(class == Job_Genetic_T) { changebase 4107; close; end; }
+	if(class == Job_Shadow_Chaser_T) { changebase 4108; close; end; }
+	if(class == Job_Sorcerer_T) { changebase 4103; close; end; }
+	if(class == Job_Wanderer_T) { changebase 4105; close; end; }
+	if(class == Job_Sura_T) { changebase 4106; close; end; }
+	if(class == Job_Ranger_T) { changebase 4098; close; end; }
+	if(class == Job_Minstrel_T) { changebase 4104; close; end; }
+	if(class == Job_Warlock_T) { changebase 4097; close; end; }
+	if(class == Job_Arch_Bishop_T) { changebase 4099; close; end; }
+	else { next; mes "[Provador de Roupa]"; mes "I'm sorry, but your class is not supported."; close; end; }
+
+reset:
+	changebase Class;
+	close;
+	end;
+
+miscsuits:
+	next;
+	mes "[Provador de Roupa]";
+	mes "Qual dos fatos você gostaria de usar?";
+	menu "Roupa de Inverno",xmas,"Roupa de Verão",summer;
+
+xmas:
+	changebase 26;
+	close;
+	end;
+
+summer:
+	changebase 27;
+	close;
+	end;
+
+}

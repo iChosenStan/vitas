@@ -1,0 +1,409 @@
+/*
+      ___           ___           ___                         ___           ___     
+     /\  \         /\__\         /\  \         _____         /\__\         /\  \    
+    _\:\  \       /:/ _/_        \:\  \       /::\  \       /:/ _/_        \:\  \   
+   /\ \:\  \     /:/ /\__\        \:\  \     /:/\:\  \     /:/ /\__\        \:\  \  
+  _\:\ \:\  \   /:/ /:/ _/_   _____\:\  \   /:/  \:\__\   /:/ /:/ _/_   _____\:\  \ 
+ /\ \:\ \:\__\ /:/_/:/ /\__\ /::::::::\__\ /:/__/ \:|__| /:/_/:/ /\__\ /::::::::\__\
+ \:\ \:\/:/  / \:\/:/ /:/  / \:\~~\~~\/__/ \:\  \ /:/  / \:\/:/ /:/  / \:\~~\~~\/__/
+  \:\ \::/  /   \::/_/:/  /   \:\  \        \:\  /:/  /   \::/_/:/  /   \:\  \      
+   \:\/:/  /     \:\/:/  /     \:\  \        \:\/:/  /     \:\/:/  /     \:\  \     
+    \::/  /       \::/  /       \:\__\        \::/  /       \::/  /       \:\__\    
+     \/__/         \/__/         \/__/         \/__/         \/__/         \/__/    
+	 
+*/
+// =========================================================== //
+// Nome: Devil Square por Stuff
+// =========================================================== //
+// Versão: 1.5
+// =========================================================== //
+// Autor: Wenden Carvalho
+// =========================================================== //
+// Changelog:
+// Alterado id view da sprite do npc de acordo com atualização do emulador.
+// Retirado comandos com letra maiúsculas que ocasionava em erros.
+// =========================================================== //
+// NPC testado dia 10/11/2016 por Wenden Carvalho.
+// =========================================================== //
+// Descrição: Ao iniciar o evento surgirão monstros nos quais
+// os jogadores terão que matar, cada monstro que o jogador matar
+// ele vai receber uma quantidade aleatória de Moeda Poring. São
+// 5 rodadas ao todo, após o final da última rodada, o NPC fará
+// uma lista dos 5 jogadores que mais mataram monstros, esses 5
+// permanecerão no evento para ir atrás das Caixas do Tesouro, os
+// demais serão teletransportados para Prontera. As Moedas Poring
+// Obtidas no evento poderão ser trocadas por itens, todo os itens
+// e quantidades são configurados aqui no prórpio script, as
+// configurações ficam na linha: 170.
+// =========================================================== //
+/* Tabela SQL - Adicione em seu PhpmyAdmin
+
+CREATE TABLE IF NOT EXISTS `devilsquare` (
+  `id_usuario` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `id_acc` int(11) NOT NULL,
+  `pontos` int(11) NOT NULL,
+  PRIMARY KEY  (`id_usuario`)
+) ENGINE=MyISAM;
+
+*/
+
+prontera,156,227,5	script	[ rTwo DS ]	570,{
+
+	mes	"["+strnpcinfo(1)+"]";
+	mes "Bem-vindo aventureiro.";
+	mes "Eu tenho um desafio para você";
+	mes "deseja aceitar?";
+	next;
+		switch(select("Sim, eu aceito:Não, volto depois:Trocar "+getitemname($@id)+":Quero informações")){
+		
+			case 1:
+			if($aberto == 0){
+			mes	"["+strnpcinfo(1)+"]";
+			mes "A Devil Square está fechado";
+			mes "no momento, volte mais tarde.";
+			close;
+			}
+			
+			percentheal 100,100;
+			warp "pvp_n_1-3",99,114;
+			announce strcharinfo(0)+" entrou na Devil Square.",8;
+			end;
+			
+			case 2:
+			mes	"["+strnpcinfo(1)+"]";
+			mes "Estarei aqui quando precisar";
+			mes "de um desafio.";
+			close;
+			
+			case 3:
+			if(!countitem($@id)){
+			mes	"["+strnpcinfo(1)+"]";
+			mes "Você não possui nenhuma";
+			mes "^FF0000"+getitemname($@id)+"^000000.";
+			close;
+			}
+			mes	"["+strnpcinfo(1)+"]";
+			mes "Escolha qual item deseja trocar";
+			mes "por ^FF0000"+getitemname($@id)+"^000000.";
+			next;
+			
+				set @menu$,"";
+				for(set @i,0; @i < getarraysize($@l); set @i,@i+1)
+				set @menu$,@menu$+""+getitemname($@l[@i])+" - ^FF0000"+$@y[@i]+"^000000x "+getitemname($@id)+":";
+				set @menu$,@menu$+"Cancelar";
+				set @sel,select(@menu$)-1;
+				if(@sel == getarraysize($@l)) close;
+				
+				mes	"["+strnpcinfo(1)+"]";
+				mes "Agora me diga quantos";
+				mes "^FF0000"+getitemname($@l[@sel])+"^000000 você quer.";
+				mes "- 0 para Cencelar.";
+				next;
+					input @qnt;
+					if(@qnt == 0) close;
+					
+					set @cost,$@y[@sel]*@qnt;
+
+						mes	"["+strnpcinfo(1)+"]";
+						mes "^FF0000"+@qnt+"^000000x ^FF0000"+getitemname($@l[@sel])+"^000000";
+						mes "São ^FF0000"+@cost+"^000000x ^FF0000"+getitemname($@id)+"^000000.";
+						mes "Deseja realizar a troca?";
+						next;
+							if(select("Sim:Não") == 2) close;
+							
+							if(countitem($@id) < @cost){
+							mes	"["+strnpcinfo(1)+"]";
+							mes "Você não tem ^FF0000"+getitemname($@id)+"^000000";
+							mes "suficientes para realizar a troca.";
+							close;
+							}
+						mes	"["+strnpcinfo(1)+"]";
+						mes "Está feito...";
+						mes "Aqui está seus";
+						mes "^FF0000"+getitemname($@l[@sel])+"^000000.";
+						close2;
+						delitem $@id,@cost;
+						getitem $@l[@sel],@qnt;
+						end;
+			
+			case 4:
+			mes	"["+strnpcinfo(1)+"]";
+			mes "A Devil Square é um evento";
+			mes "automático ondes surgem vários";
+			mes "monstros e o objetivo dos";
+			mes "jogadores é matar todos os monstros.";
+			next;
+			mes	"["+strnpcinfo(1)+"]";
+			mes "O Objetivo final é chegar a última";
+			mes "rodada onde surgem as";
+			mes "Caixas do Tesouro.";
+			next;
+			mes	"["+strnpcinfo(1)+"]";
+			mes "A cada monstro que você mata";
+			mes "você recebe ^FF0000"+getitemname($@id)+"^000000";
+			mes "a quantidade é aleatória.";
+			mes "As Caixas do Tesouro dão uma";
+			mes "quantidade mais alta de ^FF0000"+getitemname($@id)+"^000000.";
+			next;
+			mes	"["+strnpcinfo(1)+"]";
+			mes "Com esses itens você pode trocar";
+			mes "aqui mesmo por itens, os itens são";
+			mes "configurados pelo Administrador.";
+			next;
+			mes	"["+strnpcinfo(1)+"]";
+			mes "Mas para chegar até a rodada das";
+			mes "Caixas do Tesouro você precisar";
+			mes "matar muitos monstros, porque";
+			mes "somente os 5 jogadores que";
+			mes "mais matarem monstros irão";
+			mes "chegar a rodada Final.";
+			next;
+			mes "["+strnpcinfo(1)+"]";
+			mes "Os demais serão teletransportados";
+			mes "para prontera, os jogadores que";
+			mes "continuarem no evento irão correr";
+			mes "atrás das Caixas do Tesouro.";
+			close;
+		}
+		
+		OnInit:
+		// Configurações 
+		set $@id,7539; // Id do item que será recebido ao matar os monstros e as caixas do tesouro. Padrão: [7539 = Moeda Poring].
+		setarray $@p[0],1,2; // Quantidade de itens que serão sorteados ao matar os monstros. Padrão: [Entre 1 e 2].
+		setarray $@b[0],10,10,10,10; // Quantidade de itens que serão sorteados ao destruir as Caixas do Tesouro. Padrão: [Entre 20,30,40 e 50];
+		setarray $@l[0],22541,12215,12216; // Id dos itens que poderão ser trocados.
+		setarray $@y[0],100,1,1; // Preço dos itens que poderão ser trocados.
+		
+		end;
+}
+
+pvp_n_1-3,99,101,5	script	DS2	-1,{
+
+	OnTimer30000:
+	if($status == 0) end;
+	if (getmapusers("pvp_n_1-3") == 0){ announce "Todos os players foram mortos na Devil Square!!",8; set $status,0; killmonsterall "pvp_n_1-3"; end; }
+	initnpctimer;
+	end;
+
+}
+
+pvp_n_1-3,99,101,5	script	DS3	-1,{
+OnClock0118:
+OnClock0618:
+OnClock1118:
+OnClock1618:
+
+		announce "[ Digite @evento ] O portal para a Devil Square está aberto, e em [5] minutos ela terá inicio!",8;
+		initnpctimer; killmonsterall "pvp_n_1-3"; set $aberto,1; disablenpc "DS4"; set $status,1; query_sql "DELETE FROM `devilsquare`"; end;
+
+OnTimer60000:
+announce "[ Digite @evento ] O portal para a Devil Square está aberto, e em [4] minutos ela terá inicio!",8; end;
+
+OnTimer120000:
+announce "[ Digite @evento ] O portal para a Devil Square está aberto, e em [3] minutos ela terá inicio!",8; end;
+
+OnTimer180000:
+announce "[ Digite @evento ] O portal para a Devil Square está aberto, e em [2] minutos ela terá inicio!",8; end;
+
+OnTimer240000:
+announce "[ Digite @evento ] O portal para a Devil Square está aberto, e em [1] minuto ela terá inicio!",8; end;
+OnTimer300000:
+announce "[ Digite @evento ] A Devil Square começou, boa sorte a todos!",8; initnpctimer "DS2";  set $aberto,0;
+
+set $mobs,20;
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Orc Zumbi",1153,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Orc Esqueleto",1152,4,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Familiar",1005,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Drainliar",1111,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Chon Chon de Aço",1042,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Zenorc",1177,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Orc Arqueiro",1189,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Sorrateiro",1037,2,"DS3::Ondsdead";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Lobo",1013,2,"DS3::Ondsdead";
+end;
+
+Ondsdead:
+if ($status == 0) end;
+set $mobs,$mobs-1;
+set @premio,rand(getarraysize($@p));
+getitem $@id,$@p[@premio];
+callfunc "Checador",1;
+if($mobs == 10){ mapannounce "pvp_n_1-3","Devil Square: Faltam 10 monstros para a 2° rodada!",8; }
+if($mobs == 0){ announce "Devil Square: Começou a 2° rodada de monstros!",8; goto Ondsround2; }
+end;
+
+Ondsround2:
+set $mobs,20;
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Esqueleto Soldado",1028,1,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Esqueleto Soldado",1028,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Orc Arqueiro",1189,1,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Orc Arqueiro",1189,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Arenoso",1165,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Arenoso",1165,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Esqueleto Arqueiro",1016,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Esqueleto Arqueiro",1016,1,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Minorus",1149,1,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Minorus",1149,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Réquiem",1164,2,"DS3::Ondsdead2";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Réquiem",1164,2,"DS3::Ondsdead2";
+end;
+
+Ondsdead2:
+if ($status == 0) end;
+set $mobs,$mobs-1;
+set @premio,rand(getarraysize($@p));
+getitem $@id,$@p[@premio];
+callfunc "Checador",1;
+if($mobs == 10){ mapannounce "pvp_n_1-3","Devil Square: Faltam 10 monstros para 3° rodada!",8; }
+if($mobs == 0){ announce "Devil Square: Começou a 3° rodada de monstros!",8; goto Ondsround3; }
+end;
+
+Ondsround3:
+set $mobs,20;
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Diabinho",1292,2,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Diabinho",1292,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Leib Olmai",1306,2,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Leib Olmai",1306,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Gullinbursti",1311,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Gullinbursti",1311,2,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Gullinbursti",1311,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Serial Killer",1507,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Serial Killer",1507,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Serial Killer",1507,2,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Esqueleto General",1290,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Esqueleto General",1290,2,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Gato de Nove Caudas",1307,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Senhor dos Orcs",1190,1,"DS3::Ondsdead3";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Orc Héroi",1087,1,"DS3::Ondsdead3";
+end;
+
+Ondsdead3:
+if ($status == 0) end;
+set $mobs,$mobs-1;
+set @premio,rand(getarraysize($@p));
+getitem $@id,$@p[@premio];
+callfunc "Checador",1;
+if($mobs == 10){ mapannounce "pvp_n_1-3","Devil Square: Faltam 10 monstros para 4° rodada!",8; }
+if($mobs == 0){ announce "Devil Square: Começou a 4° rodada de monstros!",8; goto Ondsround4; }
+end;
+
+Ondsround4:
+set $mobs,17;
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Seyren Windsor",1634,1,"DS3::Ondsdead4";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Eremes Guile",1635,4,"DS3::Ondsdead4";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Howard Alt-Eisen",1636,5,"DS3::Ondsdead4";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Margaretha Sorin",1637,4,"DS3::Ondsdead4";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Kathryne Keyron",1639,1,"DS3::Ondsdead4";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Atroce",1785,1,"DS3::Ondsdead4";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Dragão Mutante",1262,1,"DS3::Ondsdead4";
+end;
+
+Ondsdead4:
+if ($status == 0) end;
+set $mobs,$mobs-1;
+set $@premio,rand(getarraysize($@p));
+getitem $@id,$@p[$@premio];
+callfunc "Checador",1;
+if($mobs == 5){ mapannounce "pvp_n_1-3","Devil Square: Faltam 5 monstros para 5° rodada!",8; }
+if($mobs == 0){ announce "Devil Square: Começou a 5° rodada de monstros!",8; goto Ondsround5; }
+end;
+
+Ondsround5:
+set $mobs,10;
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Salamandra",1831,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Amon-Rá",1511,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Doppelganger",1046,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Guardião Espadachim",1829,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Senhor das Trevas",1272,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Kasa",1833,1,"DS3::Ondsdead5";;
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Faraó",1157,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Bafomé",1039,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Kasa",1833,1,"DS3::Ondsdead5";
+areamonster "pvp_n_1-3",105,99,93,99,"[DS] Guardião Arqueiro",1830,1,"DS3::Ondsdead5";
+end;
+
+Ondsdead5:
+if ($status == 0) end;
+set $mobs,$mobs-1;
+set @premio,rand(getarraysize($@p));
+getitem $@id,$@p[@premio];
+callfunc "Checador",1;
+if($mobs == 5){ announce "Devil Square: Faltam 5 monstros para as Caixas do Tesouro surgirem!",8; }
+if($mobs == 0){ announce "Devil Square: 8 Caixas do Tesouros surgiram! Corram para destruir-las...",8; goto Ondsbox; }
+end;
+
+Ondsbox:
+enablenpc "DS4";
+sleep2 7000;
+set $mobs,8;
+monster "pvp_n_1-3",124,99,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",99,118,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",79,100,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",99,79,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",99,90,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",91,98,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",99,107,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+monster "pvp_n_1-3",106,99,"Caixa do Tesouro",1334,1,"DS3::Ondsboxdead";
+end;
+
+Ondsboxdead:
+if ($status == 0) end;
+set $mobs,$mobs-1;
+announce "Devil Square: O jogador [ "+ strcharinfo(0)+" ] abriu uma das Caixas do Tesouro.",8;
+set @premio,rand(getarraysize($@b));
+getitem $@id,$@b[@premio];
+if($mobs == 0){ announce "Devil Square: A última Caixa do Tesouro foi destruída!",8;
+announce "Devil Square: Obrigado a todos que participaram.",8; set $status,0; disablenpc "DS4";
+mapwarp "pvp_n_1-3","prontera",156,177;
+}
+query_sql "DELETE FROM `devilsquare`";
+end;
+}
+
+function	script	Checador	{
+
+if(getarg(0) == 1){
+set @nome$,"";
+
+query_sql "SELECT `nome` FROM `devilsquare` WHERE `id_usuario`="+getcharid(0)+"",@nome$;
+
+	if (@nome$ == ""){
+	query_sql "INSERT INTO `devilsquare` (`id_usuario`,`nome`,`id_acc`,`pontos`) VALUES ("+getcharid(0)+",'"+strcharinfo(0)+"','"+getcharid(3)+"',1)";	
+	return;
+	}
+	query_sql "UPDATE `devilsquare` SET `pontos` = `pontos` +1 WHERE `id_usuario`="+getcharid(0)+"";
+	return;
+	}
+}
+pvp_n_1-3,99,96,1	script	DS4	-1,5000,5000,{
+
+OnTouch:
+
+query_sql "SELECT nome,pontos FROM devilsquare ORDER BY pontos DESC LIMIT 5",@nome$,@pontos;
+
+	for(set @i,0; @i < 5; set @i,@i+1)
+	if(@nome$[@i] == strcharinfo(0)){
+	mapwarp "pvp_n_1-3","pvp_n_1-3",99,90;
+	pcblockmove getcharid(3),1;
+	sleep2 2000;
+	announce "Devil Square: Parabéns, você matou muitos monstros, agora tem que ir atrás das Caixas do Tesouro.",bc_self;
+	pcblockmove getcharid(3),0;
+	end;
+	}
+	warp "prontera",156,177;
+	dispbottom "A Devil Square chegou ao fim para você, obrigado por participar.";
+	end;
+}
+	
+	
+// MapFlags ~
+pvp_n_1-3	mapflag	nowarp
+pvp_n_1-3	mapflag	nowarpto
+pvp_n_1-3	mapflag	noteleport
+pvp_n_1-3	mapflag	nosave	SavePoint
+pvp_n_1-3	mapflag	nomemo
+pvp_n_1-3	mapflag	nobranch
+pvp_n_1-3	mapflag	nopenalty
+pvp_n_1-3	mapflag	pvp	off
+pvp_n_1-3	mapflag	gvg	off

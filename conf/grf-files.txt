@@ -1,0 +1,16 @@
+//-----------------------------------------
+// GRF Files
+// Add as many as needed.
+//-----------------------------------------
+//grf: C:\Program Files\Gravity\RO\rdata.grf
+//grf: C:\Program Files\Gravity\RO\data.grf
+grf: C:\Users\stanl\Desktop\Ragna2UP\RagnaBurn\data.grf
+grf: C:\Users\stanl\Desktop\Ragna2UP\RagnaBurn\on.grf
+
+
+//-----------------------------------------
+// Data Directory
+// Use the base folder, not the data\ path.
+//-----------------------------------------
+//data_dir: C:\Program Files\Gravity\RO\
+data_dir: C:\Users\stanl\Desktop\Ragna2UP\RagnaBurn

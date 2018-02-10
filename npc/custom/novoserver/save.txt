@@ -1,0 +1,629 @@
+prontera,147,167,5	script	Salvar Retorno	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "prontera",156,180; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+prontera,184,157,5	script	Salvar Retorno#2	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "prontera",191,155; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+morocc,153,105,5	script	Salvar Retorno#3	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "morocc",156,93; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+geffen,56,113,5	script	Salvar Retorno#4	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "geffen",50,115; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+payon,149,80,5	script	Salvar Retorno#5	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "payon",158,84; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+alberta,61,52,3	script	Salvar Retorno#6	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "alberta",53,53; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+izlude,125,118,3	script	Salvar Retorno#7	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "izlude",128,114; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+aldebaran,134,111,5	script	Salvar Retorno#8	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "aldebaran",141,104; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+xmas,155,128,3	script	Salvar Retorno#9	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "xmas",148,126; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+comodo,219,147,3	script	Salvar Retorno#10	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "comodo",209,143; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+amatsu,119,150,3	script	Salvar Retorno#11	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "amatsu",112,139; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+gonryun,166,124,3	script	Salvar Retorno#12	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "gonryun",160,113; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+louyang,226,110,3	script	Salvar Retorno#13	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "louyang",217,104; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+jawaii,194,292,3	script	Salvar Retorno#14	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "jawaii",205,285; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+ayothaya,153,119,3	script	Salvar Retorno#15	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "ayothaya",149,108; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+lighthalzen,161,101,3	script	Salvar Retorno#16	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "lighthalzen",158,92; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+einbech,166,129,3	script	Salvar Retorno#17	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "einbech",173,121; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+hugel,101,132,3	script	Salvar Retorno#18	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "hugel",96,126; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+rachel,125,141,3	script	Salvar Retorno#19	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "rachel",115,129; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+veins,227,125,3	script	Salvar Retorno#20	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "veins",216,123; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}
+
+moscovia,230,194,3	script	Salvar Retorno#21	663,{
+
+set .n$, "[ Kafra ]";
+
+mes .n$;
+mes "Ola "+strcharinfo(0)+" , gostaria de utilizar algum de meus serviços ?";
+next;
+switch(select("Salvar ponto de retorno:Abrir Armazem:Abrir Armazem da Guild:Resetar:Sair"))
+{
+case 1: savepoint "moscovia",223,184; close();
+case 2: openstorage; close();
+case 3: atcommand "@gstorage"; close();
+case 4:
+mes .n$;
+mes "Deseja resetar ...";
+menu "Skill",-,"Atributos",at,"Ambos",am;
+mes .n$;
+if(zeny < 200000)goto NO_ZENY;
+resetskill; close();
+at: if(zeny < 200000)goto NO_ZENY; resetstatus; close();
+am: if(zeny < 300000)goto NO_ZENY; resetstatus; resetskill; close();
+case 5: close();
+
+NO_ZENY:
+mes .n$;
+mes "Você não tem zeny suficiente .";
+close();
+}
+}

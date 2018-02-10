@@ -1,0 +1,55 @@
+// Item Trade Restrictions Database
+// Defines special trade rules for individual items.
+//
+// Structure of Database:
+// Item ID, TradeMask,Group Level Override
+//
+// Legend for 'TradeMask' field (bitmask):
+// 1   - item can't be dropped
+// 2   - item can't be traded (nor vended)
+// 4   - wedded partner can override restriction 2
+// 8   - item can't be sold to npcs
+// 16  - item can't be placed in the cart
+// 32  - item can't be placed in the storage
+// 64  - item can't be placed in the guild storage
+// 128 - item can't be attached to mail
+// 256 - item can't be auctioned
+//
+// Example:
+// 1161,67,50
+//	Balmung cannot be dropped, traded, or placed in Guild Storage (1+2+64).
+//	Only groups of group-level 50 and up can override this setting.
+
+// Wedding Related items
+12210,67,50	//goma de mascar
+20824,415,105 //dragão de prata
+
+// pacote de clans
+20800,415,105
+20801,415,105
+20802,415,105
+20803,415,105
+20804,415,105
+20805,415,105
+20806,415,105
+20807,415,105
+20808,415,105
+20810,415,105
+20811,415,105
+208120,415,105
+20813,415,105
+20814,415,105
+20815,415,105
+20816,415,105
+20817,415,105
+20818,415,105
+20820,415,105
+20821,415,105
+20822,415,105
+20823,415,105
+20824,415,105
+20825,415,105
+20826,415,105
+20827,415,105
+20828,415,105
+20829,415,105

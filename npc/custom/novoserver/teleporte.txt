@@ -1,0 +1,652 @@
+prontera,163,184,3	script	Teleportador#01::warpra	660,{
+
+
+mes "^fe785e[ Teleportador ]^000000";
+mes "Para onde você gostaria de ir?";
+next;
+menu	"^fe785eÚltimo Lugar Visitado^000000",lastwarp,"Cidades",town,"Calabouços & Campos",dunfield;
+
+town:
+menu 	"Prontera",wprontera,
+	"Alberta",walberta,
+	"Aldebaran",waldebaran,
+	"Amatsu",wamatsu,
+	"Ayothaya",wayot,
+	"Comodo",wcomodo,
+	"Einbech",weinbech,
+	"Einbroch",weinbroch,
+	"Geffen",wgeffen,
+	"Kulun(Gonryun)",wgonryun,
+	"Hugel",whugel,
+	"Izlude",wizlude,
+	"Jawaii",wjawaii,
+	"Lighthalzen",wlighthalzen,
+	"Louyang",wlouyang,
+	"Lutie",wxmas,
+	"Manuk",wmanuk,
+	"Morroc",wmorroc,
+	"Moscovia",wmosk,
+	"Nameless",namel,
+	"Niflheim",wniflheim,
+	"Payon",wpayon,
+	"Rachel",wafeltz,
+	"Splendide",wsplend,
+	"Veins",wveins,
+	"Yuno",wyuno,
+	"Umbala",wumbala;
+
+tretadun:	callsub gtfopls,	"spl_fild01",0,0;	end;
+
+leave:
+	mes "^fe785e[ Teleportador ]^000000";
+	mes "Bye";
+	close;
+
+dunfield:
+menu "Calabouços",dungeon,"Campos",fild;
+
+
+dungeon:
+menu 
+	"Esgoto de Prontera",culvert,
+	"Labirinto da Floresta",hidden,
+	"Caverna de Payon",payon,
+	"Calabouço de Geffen",geffen,
+	"Formigueiro Infernal",ant,
+	"Túnel Submarino",byalan,
+	"Mina Abandonada de Mjolnir",coal,
+	"Glast Heim",glast,
+	"Fábrica de Brinquedos",toy,
+	"Torre do Relógio",clockt,
+	"Calabouço dos Orcs",orc,
+	"Ilha da Tartaruga",turtle,
+	"Caverna de Amatsu",ama,
+	"Calabouço de Magma",magma,
+	"Calabouço de Kulun",gon,
+	"Gefenia",geffenia,
+	"Pirâmides",pyramids,
+	"Esfinge",sphinx,
+	"Navio Fantasma",sunken,
+	"Laboratório de Somatologia",wlhzdun,
+	"Caverna de Louyang",wloudun,
+	"Santuário Ancestral",wayodun,
+	"Caverna de Umbala",wumdun,
+	"Lago do Abismo",wabyss,
+	"Fábrica de Robôs",wkieldun,
+	"Calabouço da Mina",weindun,
+	"Santuário",rachels,
+	"Torre de Thanatos",wthat,
+	"Ruínas de Juperos",wjuper,
+	"Templo de Odin",wodint,
+	"Monastério",wabbey,
+	"Caverna de Gelo",iced,
+	"Vulcão de Thor",wthor,
+	"Floresta Encantada",moskdun,
+	"Caverna das Cataratas",bradun;
+
+
+fild:
+menu 	"Campos de Amatsu",wamafild,
+	"Campos de Ayothaya",wayofild,
+	"Campos de Comodo",wcmdfild,
+	"Campos de Einbroch",weinfild,
+	"Campos de Geffen",wgeffild,
+	"Campos de Kulun",wgonfild,
+	"Campos de Hugel",whufild,
+	"Campos de Lighthalzen",wlhzfild,
+	"Campos de Louyang",wloufild,
+	"Campos de Lutie",wxmasfild,
+	"Campos de Mjolnir",wmjolnir,
+	"Campos de Niflheim",wniffild,
+	"Floresta de Payon",wpayfor,
+	"Campos de Prontera",wprtfild,
+	"Campos de Rachel",warunfild,
+	"Deserto Sograt",wmocfild,
+	"Campos de Umbala",wumfild,
+	"Campos de Veins",wveinsfild,
+	"Campos de Yuno",wyunofild,
+	"Campos de Brasilis",brafild,
+	"Campos dos Esplendores",splfild,
+	"Montanhas de Manuk",manfild;
+
+
+
+
+//-------------------------------
+//          Town Warps
+//-------------------------------
+namel:	callsub gtfopls, "nameless_i.gat",230,212;	end;
+wprontera: callsub gtfopls, "prontera.gat",142,213;	end;
+walberta: callsub gtfopls, "alberta.gat",28,234;	end;
+wafeltz:	callsub gtfopls, "rachel.gat",130,137;		end;
+waldebaran:	callsub gtfopls, "aldebaran.gat",140,131;		end;
+wamatsu:	callsub gtfopls, "amatsu.gat",0,0;		end;
+wayot:		callsub gtfopls, "ayothaya.gat",208,255;		end;
+wcomodo:	callsub gtfopls, "comodo.gat",209,143;		end;
+weinbech:	callsub gtfopls, "einbech.gat",203,116;		end;
+weinbroch:	callsub gtfopls, "einbroch.gat",64,200;		end;
+whugel:		callsub gtfopls, "hugel.gat",96,145;		end;
+wlighthalzen:	callsub gtfopls, "lighthalzen.gat",158,92;		end;
+wgonryun:	callsub gtfopls, "gonryun.gat",160,121;		end;
+wgeffen:	callsub gtfopls, "geffen.gat",119,59;		end;
+wizlude:	callsub gtfopls, "izlude.gat",128,114;		end;
+wxmas:		callsub gtfopls, "xmas.gat",147,134;		end;
+wjawaii:	callsub gtfopls, "jawaii.gat",239,113;		end;
+wmanuk:	callsub gtfopls, "manuk.gat",279,123;		end;
+wmorroc:	callsub gtfopls, "morocc.gat",156,93;		end;
+wnameless:	callsub gtfopls,	"nameless_n.gat",256,215;	end;
+wniflheim:	callsub gtfopls, "niflheim.gat",85,154;		end;
+wpayon:		callsub gtfopls, "payon.gat",157,229;		end;
+wyuno:		callsub gtfopls, "yuno.gat",157,51;			end;
+wumbala:	callsub gtfopls, "umbala.gat",145,155;		end;
+wlouyang:	callsub gtfopls, "louyang.gat",210,108;		end;
+wthorcamp:	callsub gtfopls, "thor_camp.gat",254,90;		end;
+wveins:		callsub gtfopls, "veins.gat",216,123;		end;
+wmosk:	callsub gtfopls,	"moscovia",223,184;	end;
+wsplend:	callsub gtfopls,	"splendide",195,127;	end;
+
+//-------------------------------//
+//          Dungeons             //
+//-------------------------------//
+
+	bradun:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls,	"bra_dun01",0,0;	close;
+				case 2: callsub gtfopls,	"bra_dun02",0,0;	close; }
+
+
+	wjuper:	callsub gtfopls,	"yuno_fild07",212,175;	close;
+
+	wumdun:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls,	"um_dun01",0,0;	close;
+				case 2: callsub gtfopls,	"um_dun02",0,0;	close; }
+
+	wloudun:	switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls,	"lou_dun01",0,0;	close;
+				case 2: callsub gtfopls,	"lou_dun02",0,0;	close;
+				case 3: callsub gtfopls,	"lou_dun03",0,0;	close; }
+
+	wayodun:	switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls,	"ayo_dun01",0,0;	close;
+				case 2: callsub gtfopls,	"ayo_dun02",0,0;	close; }
+
+	weindun:	switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls,	"ein_dun01",0,0;	close;
+				case 2: callsub gtfopls,	"ein_dun02",0,0;	close; }
+
+	wlhzdun:	switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls,	"lhz_dun01",0,0;	close;
+				case 2: callsub gtfopls,	"lhz_dun02",0,0;	close;
+				case 3: callsub gtfopls,	"lhz_dun03",0,0;	close; }
+
+	wabyss:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls, "abyss_01",0,0;	close;
+				case 2: callsub gtfopls, "abyss_02",0,0;	close; }
+
+
+	wthat:		switch(select("Level 1:Level 2:Level 3:Level 4:Level 5:Level 6:Level 7:Level 8:Level 9:Level 10:Level 11:Level 12")) {
+				case 1: callsub gtfopls, "tha_t01",0,0;	close;
+				case 2: callsub gtfopls, "tha_t02",0,0;	close;
+				case 3: callsub gtfopls, "tha_t03",0,0;	close;
+				case 4: callsub gtfopls, "tha_t04",0,0;	close;
+				case 5: callsub gtfopls, "tha_t05",0,0;	close;
+				case 6: callsub gtfopls, "tha_t06",0,0;	close;
+				case 7: callsub gtfopls, "tha_t07",0,0;	close;
+				case 8: callsub gtfopls, "tha_t08",0,0;	close;
+				case 9: callsub gtfopls, "tha_t09",0,0;	close;
+				case 10: callsub gtfopls, "tha_t10",0,0;	close;
+				case 11: callsub gtfopls, "tha_t11",0,0;	close;
+				case 12: callsub gtfopls, "tha_t12",0,0;	close; }
+
+	wkieldun:	switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls, "kh_dun01",0,0;	close;
+				case 2: callsub gtfopls, "kh_dun02",0,0;	close; }
+
+	ant:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls,	"anthell01",0,0;	close;
+				case 2: callsub gtfopls,	"anthell02",0,0;	close; }
+
+	byalan:		switch(select("Level 1:Level 2:Level 3:Level 4:Level 5")) {
+				case 1: callsub gtfopls,	"iz_dun00",0,0;	close;
+				case 2: callsub gtfopls,	"iz_dun01",0,0;	close;
+				case 3: callsub gtfopls,	"iz_dun02",0,0;	close;
+				case 4: callsub gtfopls,	"iz_dun03",0,0;	close;
+				case 5: callsub gtfopls,	"iz_dun04",0,0;	close; }
+
+	coal:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "mjo_dun01",0,0;	close;
+				case 2: callsub gtfopls, "mjo_dun02",0,0;	close;
+				case 3: callsub gtfopls, "mjo_dun03",0,0;	close; }
+
+	culvert:	switch(select("Level 1:Level 2:Level 3:Level 4")) {
+				case 1: callsub gtfopls, "prt_sewb1",0,0;	close;
+				case 2: callsub gtfopls, "prt_sewb2",0,0;	close;
+				case 3: callsub gtfopls, "prt_sewb3",0,0;	close;
+				case 4: callsub gtfopls, "prt_sewb4",0,0;	close; }
+
+	geffen:		switch(select("Level 1:Level 2:Level 3:Level 4")) {
+				case 1: callsub gtfopls, "gef_dun00",0,0;	close;
+				case 2: callsub gtfopls, "gef_dun01",0,0;	close;
+				case 3: callsub gtfopls, "gef_dun02",0,0;	close;
+				case 4: callsub gtfopls, "gef_dun03",0,0;	close; }
+
+	geffenia:		switch(select("Level 1:Level 2:Level 3:Level 4")) {
+				case 1: callsub gtfopls, "gefenia01",0,0;	close;
+				case 2: callsub gtfopls, "gefenia02",0,0;	close;
+				case 3: callsub gtfopls, "gefenia03",0,0;	close;
+				case 4: callsub gtfopls, "gefenia04",0,0;	close; }	
+
+
+	glast:		switch(select("Entrance:Castle 1:Castle 2:Chivalry 1:Chivalry 2:Churchyard:Culvert 1:Culvert 2:Culvert 3:Culvert 4:St.Abbey:Staircase Dungeon:Underground Cave 1:Underground Cave 2:Underground Prison 1:Underground Prison 2")) {
+				case 1: callsub gtfopls, "glast_01",0,0;	close;
+				case 2: callsub gtfopls, "gl_cas01",0,0;	close;
+				case 3: callsub gtfopls, "gl_cas02",0,0;	close;
+				case 4: callsub gtfopls, "gl_knt01",0,0;	close; 
+				case 5: callsub gtfopls, "gl_knt02",0,0;	close; 
+				case 6: callsub gtfopls, "gl_chyard",0,0;	close; 
+				case 7: callsub gtfopls, "gl_sew01",0,0;	close; 
+				case 8: callsub gtfopls, "gl_sew02",0,0;	close; 
+				case 9: callsub gtfopls, "gl_sew03",0,0;	close; 
+				case 10: callsub gtfopls, "gl_sew04",0,0;	close; 
+				case 11: callsub gtfopls, "gl_church",0,0;	close; 
+				case 12: callsub gtfopls, "gl_step",0,0;	close; 
+				case 13: callsub gtfopls, "gl_dun01",0,0;	close; 
+				case 14: callsub gtfopls, "gl_dun02",0,0;	close;
+				case 15: callsub gtfopls, "gl_prison",0,0;	close;
+				case 16: callsub gtfopls, "gl_prison1",0,0;	close; }
+
+	hidden:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "prt_maze01",0,0;	close;
+				case 2: callsub gtfopls, "prt_maze02",0,0;	close;
+				case 3: callsub gtfopls, "prt_maze03",0,0;	close; }
+
+	iced:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "ice_dun01",0,0;	close;
+				case 2: callsub gtfopls, "ice_dun02",0,0;	close;
+				case 3: callsub gtfopls, "ice_dun03",0,0;	close; }
+
+	magma:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls, "mag_dun01",0,0;	close;
+				case 2: callsub gtfopls, "mag_dun02",0,0;	close; }
+
+	orc:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls, "orcsdun01",0,0;	close;
+				case 2: callsub gtfopls, "orcsdun02",0,0;	close; }
+
+
+	payon:		switch(select("Level 1:Level 2:Level 3:Level 4:Level 5")) {
+				case 1: callsub gtfopls, "pay_dun00",0,0;	close;
+				case 2: callsub gtfopls, "pay_dun01",0,0;	close;
+				case 3: callsub gtfopls, "pay_dun02",0,0;	close;
+				case 4: callsub gtfopls, "pay_dun03",0,0;	close;
+				case 5: callsub gtfopls, "pay_dun04",0,0;	close; }
+
+	pyramids:	switch(select("Level 1:Level 2:Level 3:Level 4:Level 5:Level 6")) {
+				case 1: callsub gtfopls, "moc_pryd01",0,0;	close;
+				case 2: callsub gtfopls, "moc_pryd02",0,0;	close;
+				case 3: callsub gtfopls, "moc_pryd03",0,0;	close;
+				case 4: callsub gtfopls, "moc_pryd04",0,0;	close;
+				case 5: callsub gtfopls, "moc_pryd05",0,0;	close;
+				case 6: callsub gtfopls, "moc_pryd06",0,0;	close; }
+
+	sphinx:		switch(select("Level 1:Level 2:Level 3:Level 4:Level 5")) {
+				case 1: callsub gtfopls, "in_sphinx1",0,0;	close;
+				case 2: callsub gtfopls, "in_sphinx2",0,0;	close;
+				case 3: callsub gtfopls, "in_sphinx3",0,0;	close;
+				case 4: callsub gtfopls, "in_sphinx4",0,0;	close;
+				case 5: callsub gtfopls, "in_sphinx5",0,0;	close; }
+
+	sunken:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls, "treasure01",0,0;	close;
+				case 2: callsub gtfopls, "treasure02",0,0;	close; }
+
+	toy:		switch(select("Level 1:Level 2")) {
+				case 1: callsub gtfopls, "xmas_dun01",0,0;	close;
+				case 2: callsub gtfopls, "xmas_dun02",0,0;	close; }
+
+	turtle:		switch(select("Level 1:Level 2:Level 3:Level 4")) {
+				case 1: callsub gtfopls, "tur_dun01",0,0;	close;
+				case 2: callsub gtfopls, "tur_dun02",0,0;	close;
+				case 3: callsub gtfopls, "tur_dun03",0,0;	close;
+				case 4: callsub gtfopls, "tur_dun04",0,0;	close; }
+
+	ama:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "ama_dun01",0,0;	close;
+				case 2: callsub gtfopls, "ama_dun02",0,0;	close;
+				case 3: callsub gtfopls, "ama_dun03",0,0;	close; }
+
+	gon:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "gon_dun01",0,0;	close;
+				case 2: callsub gtfopls, "gon_dun02",0,0;	close;
+				case 3: callsub gtfopls, "gon_dun03",0,0;	close; }
+
+
+	wthor:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "thor_v01",0,0;	close;
+				case 2: callsub gtfopls, "thor_v02",0,0;	close;
+				case 3: callsub gtfopls, "thor_v03",0,0;	close; }
+
+	rachels:	switch(select("Level 1:Level 2:Level 3:Level 4:Level 5")) {
+				case 1: callsub gtfopls, "ra_san01",0,0;	close;
+				case 2: callsub gtfopls, "ra_san02",0,0;	close;
+				case 3: callsub gtfopls, "ra_san03",0,0;	close;
+				case 4: callsub gtfopls, "ra_san04",0,0;	close;
+				case 5: callsub gtfopls, "ra_san05",0,0;	close; }
+
+
+	wabbey:		switch(select("Entrance:Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "nameless_n",0,0;	close;
+				case 2: callsub gtfopls, "abbey01",0,0;	close;
+				case 3: callsub gtfopls, "abbey02",0,0;	close; 
+				case 4: callsub gtfopls, "abbey03",0,0;	close; }
+
+	wodint:		switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "odin_tem01",0,0;	close;
+				case 2: callsub gtfopls, "odin_tem02",0,0;	close;
+				case 3: callsub gtfopls, "odin_tem03",0,0;	close; }
+
+	moskdun:	switch(select("Level 1:Level 2:Level 3")) {
+				case 1: callsub gtfopls, "mosk_dun01",0,0;	close;
+				case 2: callsub gtfopls, "mosk_dun02",0,0;	close;
+				case 3: callsub gtfopls, "mosk_dun03",0,0;	close; }
+
+	clockt:		switch(select("Level 1:Level 2:Level 3:Level 4:Basement 1:Basement 2:Basement 3:Basement 4")) {
+				case 1: callsub gtfopls, "c_tower1",0,0;	close;
+				case 2: callsub gtfopls, "c_tower2",0,0;	close;
+				case 3: callsub gtfopls, "c_tower3",0,0;	close; 
+				case 4: callsub gtfopls, "c_tower4",0,0;	close; 
+				case 5: callsub gtfopls, "alde_dun01",0,0;	close; 
+				case 6: callsub gtfopls, "alde_dun02",0,0;	close; 
+				case 7: callsub gtfopls, "alde_dun03",0,0;	close; 
+				case 8: callsub gtfopls, "alde_dun04",0,0;	close; }
+
+
+//-------------------------------//
+//          Fields               //
+//-------------------------------//
+
+	splfild:	switch(select("Campo 1:Campo 2:Campo 3")) {
+
+				case 1: callsub gtfopls, "spl_fild01",0,0;	close;
+				case 2: callsub gtfopls, "spl_fild02",0,0;	close;
+				case 3: callsub gtfopls, "spl_fild03",0,0;	close; }
+
+	manfild:	switch(select("Campo 1:Campo 2:Campo 3")) {
+
+				case 1: callsub gtfopls, "man_fild01",0,0;	close;
+				case 2: callsub gtfopls, "man_fild02",0,0;	close;
+				case 3: callsub gtfopls, "man_fild03",0,0;	close; }
+
+	brafild:	switch(select("Campo 1")) {
+				case 1: callsub gtfopls, "bra_fild01",0,0;	close; }
+
+	wamafild:	switch(select("Campo 1")) {
+				case 1: callsub gtfopls, "ama_fild01",0,0;	close; }
+
+	wayofild:	switch(select("Campo 1:Campo 2")) {
+				case 1: callsub gtfopls, "ayo_fild01",0,0;	close; 
+				case 2: callsub gtfopls, "ayo_fild02",0,0;	close; }
+
+	wcmdfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9")) {
+
+				case 1: callsub gtfopls, "cmd_fild01",0,0;	close;
+				case 2: callsub gtfopls, "cmd_fild02",0,0;	close;
+				case 3: callsub gtfopls, "cmd_fild03",0,0;	close;
+				case 4: callsub gtfopls, "cmd_fild04",0,0;	close;
+				case 5: callsub gtfopls, "cmd_fild05",0,0;	close;
+				case 6: callsub gtfopls, "cmd_fild06",0,0;	close;
+				case 7: callsub gtfopls, "cmd_fild07",0,0;	close;
+				case 8: callsub gtfopls, "cmd_fild08",0,0;	close;
+				case 9: callsub gtfopls, "cmd_fild09",0,0;	close; }
+
+	weinfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10")) {
+
+				case 1: callsub gtfopls, "ein_fild01",0,0;	close;
+				case 2: callsub gtfopls, "ein_fild02",0,0;	close;
+				case 3: callsub gtfopls, "ein_fild03",0,0;	close;
+				case 4: callsub gtfopls, "ein_fild04",0,0;	close;
+				case 5: callsub gtfopls, "ein_fild05",0,0;	close;
+				case 6: callsub gtfopls, "ein_fild06",0,0;	close;
+				case 7: callsub gtfopls, "ein_fild07",0,0;	close;
+				case 8: callsub gtfopls, "ein_fild08",0,0;	close;
+				case 9: callsub gtfopls, "ein_fild09",0,0;	close; 
+				case 10: callsub gtfopls, "ein_fild10",0,0;	close; }
+
+	wgeffild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11:Campo 12:Campo 13:Campo 14:Campo 15")) {
+
+				case 1: callsub gtfopls, "gef_fild00",0,0;	close;
+				case 2: callsub gtfopls, "gef_fild01",0,0;	close;
+				case 3: callsub gtfopls, "gef_fild02",0,0;	close;
+				case 4: callsub gtfopls, "gef_fild03",0,0;	close;
+				case 5: callsub gtfopls, "gef_fild04",0,0;	close;
+				case 6: callsub gtfopls, "gef_fild05",0,0;	close;
+				case 7: callsub gtfopls, "gef_fild06",0,0;	close;
+				case 8: callsub gtfopls, "gef_fild07",0,0;	close;
+				case 9: callsub gtfopls, "gef_fild08",0,0;	close; 
+				case 10: callsub gtfopls, "gef_fild09",0,0;	close; 
+				case 11: callsub gtfopls, "gef_fild10",0,0;	close; 
+				case 12: callsub gtfopls, "gef_fild11",0,0;	close; 
+				case 13: callsub gtfopls, "gef_fild12",0,0;	close; 
+				case 14: callsub gtfopls, "gef_fild13",0,0;	close; 
+				case 15: callsub gtfopls, "gef_fild14",0,0;	close; }
+
+	wgonfild:	switch(select("Campo 1")) {
+				case 1: callsub gtfopls, "gon_fild01",0,0;	close; }
+
+	whufild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7")) {
+
+				case 1: callsub gtfopls, "hu_fild01",0,0;	close;
+				case 2: callsub gtfopls, "hu_fild02",0,0;	close;
+				case 3: callsub gtfopls, "hu_fild03",0,0;	close;
+				case 4: callsub gtfopls, "hu_fild04",0,0;	close;
+				case 5: callsub gtfopls, "hu_fild05",0,0;	close;
+				case 6: callsub gtfopls, "hu_fild06",0,0;	close;
+				case 7: callsub gtfopls, "hu_fild07",0,0;	close; }
+
+	wlhzfild:	switch(select("Campo 1:Campo 2:Campo 3")) {
+
+				case 1: callsub gtfopls, "lhz_fild01",0,0;	close;
+				case 2: callsub gtfopls, "lhz_fild02",0,0;	close;
+				case 3: callsub gtfopls, "lhz_fild03",0,0;	close; }
+
+	wloufild:	switch(select("Campo 1")) {
+				case 1: callsub gtfopls, "lou_fild01",0,0;	close; }
+
+	wxmasfild:	switch(select("Campo 1")) {
+				case 1: callsub gtfopls, "xmas_fild01",0,0;	close; }
+
+	wmjolnir:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11:Campo 12")) {
+
+				case 1: callsub gtfopls, "mjolnir_01",0,0;	close;
+				case 2: callsub gtfopls, "mjolnir_02",0,0;	close;
+				case 3: callsub gtfopls, "mjolnir_03",0,0;	close;
+				case 4: callsub gtfopls, "mjolnir_04",0,0;	close;
+				case 5: callsub gtfopls, "mjolnir_05",0,0;	close;
+				case 6: callsub gtfopls, "mjolnir_06",0,0;	close;
+				case 7: callsub gtfopls, "mjolnir_07",0,0;	close;
+				case 8: callsub gtfopls, "mjolnir_08",0,0;	close;
+				case 9: callsub gtfopls, "mjolnir_09",0,0;	close; 
+				case 10: callsub gtfopls, "mjolnir_10",0,0;	close; 
+				case 11: callsub gtfopls, "mjolnir_11",0,0;	close; 
+				case 12: callsub gtfopls, "mjolnir_12",0,0;	close; }
+
+	wniffild:	switch(select("Campo 1:Campo 2")) {
+
+				case 1: callsub gtfopls, "nif_fild01",0,0;	close;
+				case 2: callsub gtfopls, "nif_fild02",0,0;	close; }
+
+	wpayfor:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11")) {
+
+				case 1: callsub gtfopls, "pay_fild01",0,0;	close;
+				case 2: callsub gtfopls, "pay_fild02",0,0;	close;
+				case 3: callsub gtfopls, "pay_fild03",0,0;	close;
+				case 4: callsub gtfopls, "pay_fild04",0,0;	close;
+				case 5: callsub gtfopls, "pay_fild05",0,0;	close;
+				case 6: callsub gtfopls, "pay_fild06",0,0;	close;
+				case 7: callsub gtfopls, "pay_fild07",0,0;	close;
+				case 8: callsub gtfopls, "pay_fild08",0,0;	close;
+				case 9: callsub gtfopls, "pay_fild09",0,0;	close; 
+				case 10: callsub gtfopls, "pay_fild10",0,0;	close; 
+				case 11: callsub gtfopls, "pay_fild11",0,0;	close; }
+
+	wprtfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11:Campo 12")) {
+
+				case 1: callsub gtfopls, "prt_fild00",0,0;	close;
+				case 2: callsub gtfopls, "prt_fild01",0,0;	close;
+				case 3: callsub gtfopls, "prt_fild02",0,0;	close;
+				case 4: callsub gtfopls, "prt_fild03",0,0;	close;
+				case 5: callsub gtfopls, "prt_fild04",0,0;	close;
+				case 6: callsub gtfopls, "prt_fild05",0,0;	close;
+				case 7: callsub gtfopls, "prt_fild06",0,0;	close;
+				case 8: callsub gtfopls, "prt_fild07",0,0;	close;
+				case 9: callsub gtfopls, "prt_fild08",0,0;	close; 
+				case 10: callsub gtfopls, "prt_fild09",0,0;	close; 
+				case 11: callsub gtfopls, "prt_fild10",0,0;	close;
+				case 12: callsub gtfopls, "prt_fild11",0,0;	close; }
+
+	warunfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11:Campo 12:Fiel 13")) {
+
+				case 1: callsub gtfopls, "ra_fild01",0,0;	close;
+				case 2: callsub gtfopls, "ra_fild02",0,0;	close;
+				case 3: callsub gtfopls, "ra_fild03",0,0;	close;
+				case 4: callsub gtfopls, "ra_fild04",0,0;	close;
+				case 5: callsub gtfopls, "ra_fild05",0,0;	close;
+				case 6: callsub gtfopls, "ra_fild06",0,0;	close;
+				case 7: callsub gtfopls, "ra_fild07",0,0;	close;
+				case 8: callsub gtfopls, "ra_fild08",0,0;	close;
+				case 9: callsub gtfopls, "ra_fild09",0,0;	close; 
+				case 10: callsub gtfopls, "ra_fild10",0,0;	close; 
+				case 11: callsub gtfopls, "ra_fild11",0,0;	close; 
+				case 12: callsub gtfopls, "ra_fild12",0,0;	close; 
+				case 13: callsub gtfopls, "ra_fild13",0,0;	close; }
+
+	wmocfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11:Campo 12:Fiel 13:Fiel 14:Fiel 15:Fiel 16:Fiel 17:Fiel 18:Fiel 19:Fiel 20:Fiel 21:Fiel 22")) {
+
+				case 1: callsub gtfopls, "moc_fild01",0,0;	close;
+				case 2: callsub gtfopls, "moc_fild02",0,0;	close;
+				case 3: callsub gtfopls, "moc_fild03",0,0;	close;
+				case 4: callsub gtfopls, "moc_fild04",0,0;	close;
+				case 5: callsub gtfopls, "moc_fild05",0,0;	close;
+				case 6: callsub gtfopls, "moc_fild06",0,0;	close;
+				case 7: callsub gtfopls, "moc_fild07",0,0;	close;
+				case 8: callsub gtfopls, "moc_fild08",0,0;	close;
+				case 9: callsub gtfopls, "moc_fild09",0,0;	close; 
+				case 10: callsub gtfopls, "moc_fild10",0,0;	close; 
+				case 11: callsub gtfopls, "moc_fild11",0,0;	close; 
+				case 12: callsub gtfopls, "moc_fild12",0,0;	close; 
+				case 13: callsub gtfopls, "moc_fild13",0,0;	close; 
+				case 14: callsub gtfopls, "moc_fild14",0,0;	close; 
+				case 15: callsub gtfopls, "moc_fild15",0,0;	close; 
+				case 16: callsub gtfopls, "moc_fild16",0,0;	close; 
+				case 17: callsub gtfopls, "moc_fild17",0,0;	close; 
+				case 18: callsub gtfopls, "moc_fild18",0,0;	close; 
+				case 19: callsub gtfopls, "moc_fild19",0,0;	close; 
+				case 20: callsub gtfopls, "moc_fild20",0,0;	close; 
+				case 21: callsub gtfopls, "moc_fild21",0,0;	close;
+				case 22: callsub gtfopls, "moc_fild22",0,0;	close; }
+
+	wumfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4")) {
+
+				case 1: callsub gtfopls, "um_fild01",0,0;	close;
+				case 2: callsub gtfopls, "um_fild02",0,0;	close;
+				case 3: callsub gtfopls, "um_fild03",0,0;	close;
+				case 4: callsub gtfopls, "um_fild04",0,0;	close; }
+
+	wveinsfild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7")) {
+
+				case 1: callsub gtfopls, "ve_fild01",0,0;	close;
+				case 2: callsub gtfopls, "ve_fild02",0,0;	close;
+				case 3: callsub gtfopls, "ve_fild03",0,0;	close;
+				case 4: callsub gtfopls, "ve_fild04",0,0;	close; 
+				case 5: callsub gtfopls, "ve_fild05",0,0;	close; 
+				case 6: callsub gtfopls, "ve_fild06",0,0;	close; 
+				case 7: callsub gtfopls, "ve_fild07",0,0;	close; }
+
+	wyunofild:	switch(select("Campo 1:Campo 2:Campo 3:Campo 4:Campo 5:Campo 6:Campo 7:Campo 8:Campo 9:Campo 10:Campo 11:Campo 12")) {
+
+				case 1: callsub gtfopls, "yuno_fild01",0,0;	close;
+				case 2: callsub gtfopls, "yuno_fild02",0,0;	close;
+				case 3: callsub gtfopls, "yuno_fild03",0,0;	close;
+				case 4: callsub gtfopls, "yuno_fild04",0,0;	close;
+				case 5: callsub gtfopls, "yuno_fild05",0,0;	close;
+				case 6: callsub gtfopls, "yuno_fild06",0,0;	close;
+				case 7: callsub gtfopls, "yuno_fild07",0,0;	close;
+				case 8: callsub gtfopls, "yuno_fild08",0,0;	close;
+				case 9: callsub gtfopls, "yuno_fild09",0,0;	close; 
+				case 10: callsub gtfopls, "yuno_fild10",0,0;	close; 
+				case 11: callsub gtfopls, "yuno_fild11",0,0;	close; 
+				case 12: callsub gtfopls, "yuno_fild12",0,0;	close; }
+
+
+gtfopls:
+
+	set lastwarpmap$,getarg(0);
+	set lastwarpx,getarg(1);
+	set lastwarpy,getarg(2); // don't need to end ... just read to next label
+
+lastwarp:
+
+	if ( lastwarpmap$ == "" ) close; // check if the person use last warp option without any variable saved
+	warp lastwarpmap$,lastwarpx,lastwarpy;
+
+OnInit:
+	waitingroom " Teleportador ",0; end;
+
+}
+
+
+aldebaran.gat,136,119,4	duplicate(warpra)	Teleportador#03	660
+amatsu.gat,105,143,5	duplicate(warpra)	Teleportador#04	660
+ayothaya.gat,143,107,4	duplicate(warpra)	Teleportador#05	660
+comodo.gat,203,153,4	duplicate(warpra)	Teleportador#06	660
+//einbroch.gat,59,205,4	duplicate(warpra)	Teleportador#07	847
+//einbroch.gat,243,189,2	duplicate(warpra)	Teleportador#08	847
+einbech,168,132,3	duplicate(warpra)	Teleportador#09	660
+nameless_i,222,217,5	duplicate(warpra)	Teleportador#10	847
+gonryun.gat,156,124,4	duplicate(warpra)	Teleportador#11	660
+izlude.gat,134,110,4	duplicate(warpra)	Teleportador#12	660
+hugel.gat,91,139,5	duplicate(warpra)	Teleportador#13	660
+lighthalzen.gat,150,95,6	duplicate(warpra)	Teleportador#14	660
+louyang.gat,210,114,4	duplicate(warpra)	Teleportador#15	660
+morocc.gat,159,105,4	duplicate(warpra)	Teleportador#16	660
+//prontera.gat,161,192,4	duplicate(warpra)	Teleportador#17	847
+payon.gat,165,96,5	duplicate(warpra)	Teleportador#18	660
+umbala.gat,86,157,4	duplicate(warpra)	Teleportador#19	847
+xmas.gat,152,136,4	duplicate(warpra)	Teleportador#20	660
+//yuno.gat,163,182,4	duplicate(warpra)	Teleportador#21	847
+ama_dun01.gat,233,9,1	duplicate(warpra)	Teleportador#22	847
+moc_fild04.gat,207,331,4	duplicate(warpra)	Teleportador#23	847
+ayo_fild02.gat,279,154,4	duplicate(warpra)	Teleportador#24	847
+izlu2dun.gat,104,82,4	duplicate(warpra)	Teleportador#25	847
+prt_sewb1.gat,125,253,4	duplicate(warpra)	Teleportador#26	847
+mjolnir_02.gat,85,363,4	duplicate(warpra)	Teleportador#27	847
+einbech.gat,74,106,1	duplicate(warpra)	Teleportador#28	847
+glast_01.gat,370,308,4	duplicate(warpra)	Teleportador#29	847
+//yuno_fild03.gat,37,135,4	duplicate(warpra)	Teleportador#30	847
+//niflheim.gat,31,159,4	duplicate(warpra)	Teleportador#31	847
+gef_fild10.gat,71,339,4	duplicate(warpra)	Teleportador#32	847
+pay_arche.gat,39,135,5	duplicate(warpra)	Teleportador#33	847
+moc_ruins.gat,64,166,4	duplicate(warpra)	Teleportador#34	847
+moc_fild19.gat,106,97,4	duplicate(warpra)	Teleportador#35	847
+alb2trea.gat,73,101,4	duplicate(warpra)	Teleportador#36	847
+tur_dun01.gat,148,239,4	duplicate(warpra)	Teleportador#37	847
+lhz_dun01.gat,157,285,4	duplicate(warpra)	Teleportador#38	847
+hu_fild05.gat,186,210,4	duplicate(warpra)	Teleportador#39	847
+yuno_fild07.gat,221,179,4	duplicate(warpra)	Teleportador#40	847
+tha_scene01.gat,139,194,1	duplicate(warpra)	Teleportador#41	847
+odin_tem01.gat,96,149,4	duplicate(warpra)	Teleportador#42	847
+geffen,45,126,5	duplicate(warpra)	Warp NPC#43	660
+rachel,106,134,5	duplicate(warpra)	Teleportador#44	660
+veins,224,130,5	duplicate(warpra)	Warp NPC#45	660
+alberta,47,52,5	duplicate(warpra)	Teleportador#46	660
+yuno,157,89,5	duplicate(warpra)	Warp NPC#46	847
+jawaii,197,287,5	duplicate(warpra)	Teleportador#47	660
+//prontera,217,183,5	duplicate(warpra)	Teleportador#48	847
+//prontera,160,193,4	duplicate(warpra)	Teleportador#49	847
+//alberta,36,240,5	duplicate(warpra)	Teleportador#50	847
+moscovia,225,194,5	duplicate(warpra)	Teleportador#51	660
+//niflheim,205,179,4	duplicate(warpra)	Teleportador#52	847
+jawaii,234,100,5	duplicate(warpra)	Teleportador#53	847
+einbech,206,123,5	duplicate(warpra)	Teleportador#54	847
+manuk,270,130,5	duplicate(warpra)	Teleportador#55	847
+splendide,206,180,4	duplicate(warpra)	Teleportador#56	847
+brasilis,202,171,4	duplicate(warpra)	Teleportador#57	847

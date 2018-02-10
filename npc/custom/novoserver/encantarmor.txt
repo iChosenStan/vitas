@@ -1,0 +1,38 @@
+prontera,186,211,3	script	Encantar Armaduras	544,{
+mes "Qual armadura você deseja encantar?";
+mes "Certifique-se de que não existe carta ou runa nele ^FF0000pois serão excluidos^000000.";
+next;
+setarray .EquipID[0],2307,2309,2314,2316,2321,2325,2327,2328,2330,2332,2334,2335,2341,2344,2346,2348,2350,2337,2386,2394,2395,2396,2311,2318,2319,2320,2308,2310,2315,2317,2322,2324,2326,2331,2333,2336,2342,2345,2347,2349,2351,2364,2365,2391,2374,2375,2376,2377,2378,2379,2380,2381,2382,2387,2388,2389,2390,20826,20812,20812;
+for( set .@i,0; .@i < getarraysize( .EquipID ); set .@i,.@i + 1 ){
+set .@EquipMenu$,.@EquipMenu$ + getitemname( .EquipID[.@i] )+( !getitemslots(.EquipID[.@i])?"":"["+getitemslots(.EquipID[.@i])+"]" )+":";
+}
+set .@Equip,select( .@EquipMenu$ ) - 1;
+if( !countitem( .EquipID[.@Equip] ) || countitem( 674 ) < 10 ){
+mes "Você não possui este equipamento com você ou você não teve o suficiente de ^FF000010^000000 "+getitemname( 674 );
+close;
+}
+mes "Equipmento : ^FF0000"+getitemname( .EquipID[.@Equip] )+"^000000";
+switch( select( "[ ^FF0000•^000000 ] STR + ^FF00003^000000:[ ^FF0000•^000000 ] INT   + ^FF00003^000000:[ ^FF0000•^000000 ] DEX + ^FF00003^000000:[ ^FF0000•^000000 ] AGI   + ^FF00003^000000:[ ^FF0000•^000000 ] VIT   + ^FF00003^000000:[ ^FF0000•^000000 ] LUK + ^FF00003^000000" )){
+Case 1: setarray .RuneID[0],4702; break;
+Case 2: setarray .RuneID[0],4712; break;
+Case 3: setarray .RuneID[0],4722; break;
+Case 4: setarray .RuneID[0],4732; break;
+Case 5: setarray .RuneID[0],4742; break;
+Case 6: setarray .RuneID[0],4752; break;
+}
+for( set .@i,0; .@i < getarraysize( .RuneID ); set .@i,.@i + 1 ){
+set .@RuneMenu$,.@RuneMenu$ + getitemname( .RuneID[.@i] )+":";
+}
+set .@Rune,select( .@RuneMenu$ ) - 1;
+mes "Tipo de runa : ^FF0000"+getitemname( .RuneID[.@Rune] )+"^000000";
+next;
+if( select("Confirma:Cancelar") == 1 ){
+delitem .EquipID[.@Equip],1;
+delitem 674,10;
+getitem2 .EquipID[.@Equip],1,1,0,0,0,0,0,.RuneID[.@Rune];
+mes "Done.";
+mes "^0000FF"+getitemname( .EquipID[.@Equip] )+"^000000";
+mes "Encantar com ^FF0000"+getitemname( .RuneID[.@Rune] )+"^000000";
+}
+close;
+}

@@ -1,0 +1,997 @@
+//===== Script ========================================
+//= Buff+Healerg
+//===== Por: =================================================
+//= ADM Hefesto/WorD
+//===== Versão Atual: ========================================
+//= 1.0
+//===== Compatibilidade: =====================================
+//= Cronus
+//===== Descrição: ===========================================
+//= Buffer vips/não vips com Cura e Efeitos
+//===== Comentários Adicionais: ==============================
+//= Não Retirar os Creditos
+//============================================================
+prontera,158,192,4	script	Curandeira#0	485,7,7,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+
+	
+payon,149,85,5	script	Curandeira#1	485,10,10,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+alberta,52,61,5	script	Curandeira#2	485,9,9,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+prontera,199,162,3	script	Curandeira#3	485,8,8,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+morocc,164,105,3	script	Curandeira#4	485,20,20,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+geffen,50,126,5	script	Curandeira#6	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+izlude,130,118,5	script	Curandeira#7	485,10,10,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+aldebaran,134,115,5	script	Curandeira#8	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+xmas,155,133,5	script	Curandeira#9	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+comodo,209,153,5	script	Curandeira#10	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+amatsu,113,150,5	script	Curandeira#11	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+gonryun,153,119,5	script	Curandeira#12	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+louyang,216,114,5	script	Curandeira#13	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+jawaii,203,294,5	script	Curandeira#14	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+ayothaya,146,119,5	script	Curandeira#15	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+lighthalzen,154,101,5	script	Curandeira#16	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+einbech,67,106,5	script	Curandeira#17	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+hugel,96,139,5	script	Curandeira#18	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+rachel,110,138,5	script	Curandeira#19	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+veins,219,131,5	script	Curandeira#20	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+moscovia,219,194,5	script	Curandeira#21	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+einbech,174,132,5	script	Curandeira#22	485,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+bat_b01,390,13,5	script	Curandeira#23	95,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}
+	
+bat_b01,10,293,5	script	Curandeira#24	95,15,15,{
+
+if(getgroupid()<1) goto novip;
+
+	percentheal 100,100;
+		skilleffect 8,0; sc_start SC_ENDURE,360000,10;
+		skilleffect 33,0; sc_start SC_ANGELUS,360000,10;
+		skilleffect 74,0; sc_start SC_MAGNIFICAT,360000,5;
+		skilleffect 75,0; sc_start SC_GLORIA,360000,5;
+		skilleffect 66,0; sc_start SC_IMPOSITIO,360000,5;
+		skilleffect 34,0; sc_start SC_BLESSING,600000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,600000,10;
+	repairall;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+
+novip:
+	repairall;
+	percentheal 100,100;
+		skilleffect 34,0; sc_start SC_BLESSING,240000,10;
+		skilleffect 29,0; sc_start SC_INCREASEAGI,240000,10;
+	// Identify all unidentified items
+	getinventorylist;
+	for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+		if ( @inventorylist_identify[.@i] == 1 ) continue;
+		delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+		getitem @inventorylist_id[.@i],1;
+		set .@count, .@count +1;
+	}
+	if (.@count) dispbottom .@count +" items identificados bom jogo.";
+	end;
+	}

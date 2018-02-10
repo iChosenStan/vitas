@@ -1,0 +1,8 @@
+function 	script	randombox	{
+setarray .BoxItems[0],19500,19501,19502,19503,19504,19505,19506,19507,19508,19509,19510;
+
+
+set .Random, rand( getarraysize( .BoxItems ) );
+getitem .BoxItems[ .Random ], 1;
+end;
+}

@@ -1,0 +1,10 @@
+// Specific items for Vending System
+// Format: ItemID
+// Max items is equal MAX_INVENTORY ( 100 by default )
+
+// Emblema de Guerra
+//7773
+// Woe Points
+//671
+// Moeda Poring
+//7539

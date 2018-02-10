@@ -1,0 +1,243 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Acorns)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+mjolnir_01,293,20,3	script	Nutters#Coco_Hunt	779,{
+	if (checkquest(60113) != -1) {
+		if (checkquest(60113,HUNTING) != 2 ) {
+			mes "[Nutters]";
+			mes "Você terminou de caçar o 50 Cocos?";
+			next;
+			switch(select("Sim:Não:Eu quero sair")) {
+			case 1:
+				mes "[Nutters]";
+				mes "Hmm, eu não acho que você tenha caçado 50 ainda...";
+				close;
+			case 2:
+				mes "[Nutters]";
+				mes "Lembre-se, eu preciso de ajuda para caçar Cocos para ir e caçar 50 deles.";
+				close;
+			case 3:
+				mes "[Nutters]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado";
+				next;
+				switch(select("Sim:Não")) {
+				case 1:
+					mes "[Nutters]";
+					mes "Ok, então, volte aqui se você mudar de idéia.";
+					erasequest 60113;
+					close;
+				case 2:
+					mes "[Nutters]";
+					mes "Por favor mate 50 Cocos.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Nutters]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 3600,3905;
+			erasequest 60113;
+			close;
+		}
+	}
+	if (checkquest(60114) != -1) {
+		if (checkquest(60114,HUNTING) != 2 ) {
+			mes "[Nutters]";
+			mes "Você terminou de caçar os 50 Cocos?";
+			next;
+			switch(select("Sim:Não:Eu quero sair")) {
+			case 1:
+				mes "[Nutters]";
+				mes "Hmm, eu não acho que você tenha caçado 100 ainda";
+				close;
+			case 2:
+				mes "[Nutters]";
+				mes "Lembre-se, eu preciso de ajuda para caçar Cocos, então vá e mate 100 deles.";
+				close;
+			case 3:
+				mes "[Nutters]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado";
+				next;
+				switch(select("Sim:Não")) {
+				case 1:
+					mes "[Nutters]";
+					mes "Ok, então, volte aqui se você mudar de idéia.";
+					erasequest 60114;
+					close;
+				case 2:
+					mes "[Nutters]";
+					mes "Por favor mate 100 Cocos.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Nutters]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 3600,3905;
+			getexp 3600,3905;
+			erasequest 60114;
+			close;
+		}
+	}
+	if (checkquest(60115) != -1) {
+		if (checkquest(60115,HUNTING) != 2 ) {
+			mes "[Nutters]";
+			mes "Você terminou de caçar os 150 Cocos?";
+			next;
+			switch(select("Sim:Não:Eu quero sair")) {
+			case 1:
+				mes "[Nutters]";
+				mes "Hmm, eu não acho que você já caçou 150 ainda...";
+				close;
+			case 2:
+				mes "[Nutters]";
+				mes "Lembre-se, eu preciso de ajuda para caçar Cocos, então vá e mate 150 deles.";
+				close;
+			case 3:
+				mes "[Nutters]";
+				mes "Tem certeza de que deseja parar de caçar?";
+				mes "Qualquer progresso que você fez será apagado";
+				next;
+				switch(select("Sim:Não")) {
+				case 1:
+					mes "[Nutters]";
+					mes "Ok, então, volte aqui se você mudar de idéia.";
+					erasequest 60115;
+					close;
+				case 2:
+					mes "[Nutters]";
+					mes "Por favor mate 150 Cocos.";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[Nutters]";
+			mes "Incrível, você fez isso com rapidez.";
+			getexp 3600,3905;
+			getexp 3600,3905;
+			getexp 3600,3905;
+			erasequest 60115;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 17) {
+		//for maximum level
+		if (BaseLevel < 60) {
+			mes "[Nutters]";
+			mes "Eu ... simplesmente não consigo encontrar nenhum.";
+			mes "Pesky Coco's escondeu todas as bolotas.";
+			mes "Você acha que poderia me ajudar?";
+			next;
+			switch(select("Certo:Não")) {
+			case 1:
+				mes "[Nutters]";
+				mes "Oh isso é ótimo! Eu sabia que podia contar com você, apenas de olhar para você!";
+				next;
+				switch(select("Coletar item:Matar cocos:Cancelar")) {
+				case 1:
+					// Item turn in
+					mes "[Nutters]";
+					mes "Você pode me ajudar a encontrar ^00CE0025 Bolotas ^000000.";
+					mes "Eu recompensarei você com muito se você puder.";
+					next;
+					switch(select("Eu tenho 25 bolotas:Por favor, venha novamente?")) {
+					case 1:
+						/*
+						if (checkweight(502,5) == 0) {
+							mes "[Nutters]";
+							mes "Ei, parece que está pesado";
+							mes "suas costas vão te esmagar. Volte";
+							mes "depois de perder algum peso.";
+							close;
+						}
+						*/
+						if (countitem(1026) > 24) {
+							mes "[Nutters]";
+							mes "Oh, ótimo, descobriu-se onde eles estavam escondendo.";
+							mes "me de me de!!!";
+							next;
+							mes "[Nutters]";
+							mes "Ah, está certo, desculpe, eu adoro assar Bolotas. Mmm.";
+							mes "Aqui está o que eu prometi a você.";
+							delitem 1026,25; //Acorn
+							getexp 3600,3905;
+							//getitem 502,5; //Orange_Potion
+							close;
+						}
+						else {
+							mes "[Nutters]";
+							mes "Onde estão minhas ^00CE00Bolotas^000000?";
+							mes "Ei, eu não estou jogando, é melhor você não me segurar.";
+							close;
+						}
+					case 2:
+						mes "[Nutters]";
+						mes "eu preciso^00CE0025 Bolotas^000000.";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[Nutters]";
+					mes "Ah, ok, acho que você pode me ajudar com a caça de Cocos.";
+					mes "Quantos você gostaria de caçar?";
+					next;
+					switch(select("50 Cocos:100 Cocos:150 Cocos")) {
+					case 1:
+						mes "[Nutters]";
+						mes "Volte quando você terminar sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60113;
+						close;
+					case 2:
+						mes "[Nutters]";
+						mes "Volte quando você terminar sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60114;
+						close;
+					case 3:
+						mes "[Nutters]";
+						mes "Volte quando você terminar sua tarefa e eu lhe darei uma pequena recompensa.";
+						setquest 60115;
+						close;
+					}
+				case 3:
+					mes "[Nutters]";
+					mes "Se você mudar de opinião, volte.";
+					close;
+				}
+			case 2:
+				mes "[Nutters]";
+				mes "Se você mudar de opinião, volte.";
+				close;
+			}
+		}
+		else {
+			mes "[Nutters]";
+			mes "Você é muito forte para lutar nessas coisas!";
+			close;
+		}
+	}
+	else {
+		mes "[Nutters]";
+		mes "Você é muito pequeno para lutar contra essas coisas por mim.";
+		mes "Você pode ficar um pouco mais alto e depois retornar?";
+		close;
+	}
+}

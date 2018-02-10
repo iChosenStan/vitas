@@ -1,0 +1,87 @@
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+// Npc criado por Morpheus
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+// Nome do Npc Loja de Rops
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+// Versão atual v1.
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+// Npc criado em 25/10/2014
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+// Compatível com eAthena
+//=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+
+//LOJAS
+	
+-	cashshop	topo	-1,18550:35000,5451:29000,5452:20000,5453:12000,5518:12000,5374:18000,5423:19000,5801:18000,5225:16000,5137:12000,5376:10000,18522:15000
+
+-	cashshop	meio	-1,2202:12000,2204:12000,18507:12000,5325:12000,5800:12000,5314:12000,18599:12000
+
+-	cashshop	cash-baixo	-1,5594:13000,5403:13000,5377:13000,5846:13000,5596:13000,5548:13000,5483:13000,5155:13000
+
+-	cashshop	utilidades	-1,674:1000,7460:2000,7461:8000,670:1002,676:102,672:3,12274:50,12275:50,14536:10,14538:20,13989:100,14004:100,682:30,683:30,684:50,12122:30,12123:30,12124:40,12202:30,12203:30,12204:30,12205:30,12206:30,12207:30,7776:200,12210:600,12215:100,12216:100
+
+-	cashshop	Especiais	-1,22541:4000,2589:30000,2573:30000,2576:30000,12622:10000
+
+
+
+prontera,163,193,4	script	Loja Cash	795,{
+
+mes "^FF6600[Loja de Itens Cash]^000000";
+	mes (gettime(3)>= 6&&gettime(3)<= 12?"Bom-dia":(gettime(3)>=13&&gettime(3)<=18?"Boa-tarde":"Boa-noite"))+", ^008aff"+strcharinfo(0)+"^000000 !";
+	mes "Aqui você pode comprar todos os itens donates encontrados no jogo.";
+	mes "Os itens podem ser adquiridos por ^EEAD2DCash^4682B4.";
+	next;
+	mes "^FF6600[Loja de Itens Cash]^000000";
+	mes "A skill de desconto dos mercadores não influência o preço.";
+	mes "^6A5ACD- GM's não irão devolver seu Cash caso compre algo errado.^4682B4";
+	mes "- Boas compras.";
+	next;
+mes "^FF6600[Loja de Itens Cash]^000000";
+mes "Vejo que você possui ^EEAD2D["+#CASHPOINTS+"]^4682B4 pontos de Cash.";
+mes "Selecione a loja que deseja visualizar:";
+next;
+	switch(select(
+	"^0084ff[ • ]^000000 Equipamentos para Cabeça [^0000FFTopo^000000]",
+	"^0084ff[ • ]^000000 Equipamentos para Cabeça [^0000FFMeio^000000]",
+	"^0084ff[ • ]^000000 Equipamentos para Cabeça [^0000FFBaixo^000000]",
+	"^0084ff[ • ]^000000 Utilidades [^0000FFUsáveis^000000]",
+	"^0084ff[ • ]^000000 Equipamentos [^FF6600Especiais^000000]",
+	"^ff0000[ • ]^000000 Fechar")){
+	
+	close2;
+		case 1: callshop "topo",0; end;
+		case 2: callshop "meio",0; end;
+		case 3: callshop "cash-baixo",0; end;
+		case 4: callshop "utilidades",0; end;
+		case 5: callshop "Especiais",0; end;
+		case 6: end;
+	
+	}
+	
+OnInit:
+	waitingroom "[  Loja Cash  ]  ",0;
+
+	end;
+
+
+}
+
+morocc,168,101,3	duplicate(Loja Cash)	Loja Cash#lC1	795
+geffen,40,124,3	duplicate(Loja Cash)	Loja Cash#lC2	795
+payon,149,91,5	duplicate(Loja Cash)	Loja Cash#lC3	795
+alberta,47,61,5	duplicate(Loja Cash)	Loja Cash#lC6	795
+izlude,136,120,5	duplicate(Loja Cash)	Loja Cash#lC4	795
+aldebaran,146,119,5	duplicate(Loja Cash)	Loja Cash#lC5	795
+xmas,139,128,5	duplicate(Loja Cash)	Loja Cash#lC7	795
+comodo,199,142,5	duplicate(Loja Cash)	Loja Cash#lC8	795
+amatsu,122,136,3	duplicate(Loja Cash)	Loja Cash#lC9	795
+gonryun,168,118,3	duplicate(Loja Cash)	Loja Cash#lC10	795
+louyang,207,104,3	duplicate(Loja Cash)	Loja Cash#lC11	795
+jawaii,209,297,3	duplicate(Loja Cash)	Loja Cash#lC12	795
+ayothaya,143,111,3	duplicate(Loja Cash)	Loja Cash#lC13	795
+lighthalzen,152,89,5	duplicate(Loja Cash)	Loja Cash#lC14	795
+einbech,182,124,5	duplicate(Loja Cash)	Loja Cash#lC15	795
+hugel,101,139,5	duplicate(Loja Cash)	Loja Cash#lC16	795
+rachel,102,130,5	duplicate(Loja Cash)	Loja Cash#lC17	795
+veins,209,122,5	duplicate(Loja Cash)	Loja Cash#lC18	795
+moscovia,208,184,5	duplicate(Loja Cash)	Loja Cash#lC19	795

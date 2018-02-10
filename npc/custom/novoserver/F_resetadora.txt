@@ -1,0 +1,52 @@
+//===== Cronus Script ======================================== 
+//= Resetadora
+//===== Por: =================================================
+//= eAthena Dev Team
+//===== Versão Atual: ======================================== 
+//= 1.1
+//===== Descrição: =========================================== 
+//= Reseta os pontos de Habilidades e Atributos do personagem
+//===== Changelog: =========================================== 
+//= 1.0 Iniciado o Npc [eAthena]
+//= 1.1 Traduzido [ramonsrf]
+//============================================================
+
+prontera,167,200,5	script	Resetadora	641,{
+	mes "[Resetadora]";
+	mes "Olá, posso resetar seus pontos.";
+	mes "Resetar Habilidades: 5,000z";
+	mes "Resetar Atributos: 5,000z";
+	mes "Resetar Ambos: 9,000z";
+	next;
+	mes "Por favor escolha o serviço que deseja:";
+	menu "^FF3355Resetar Habilidades",L0,"Resetar Atributos",L1,"Resetar Ambos^000000",L2,"Nenhum, obrigado.",LEnd;
+	
+	L0:
+		mes "[Resetadora]";
+		if (Zeny < 5000) goto NeedZenys;
+		mes "Tudo bem, vou resetar agora.. Lembrando, ajeite seus pontos e fale comigo mais vezes se precisar!";
+		set Zeny,zeny-5000;
+		ResetSkill;
+		close;
+	L1:
+		mes "[Resetadora]";
+		if (Zeny < 5000) goto NeedZenys;
+		mes "Tudo bem, vou resetar agora.. Lembrando, ajeite seus pontos e fale comigo mais vezes se precisar!";
+		set Zeny,zeny-5000;
+		ResetStatus;
+		close;
+	L2:
+		mes "[Resetadora]";
+		if (Zeny < 9000) goto NeedZenys;
+		mes "Tudo bem, vou resetar agora.. Lembrando, ajeite seus pontos e fale comigo mais vezes se precisar!";
+		set Zeny,zeny-9000;
+		ResetSkill;
+		ResetStatus;
+		close;
+
+		NeedZenys:
+			mes "Desculpe, você não tem todo o Zeny necessário.";
+			close;
+	LEnd:
+		close;	
+}

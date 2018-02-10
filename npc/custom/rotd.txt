@@ -1,0 +1,145 @@
+prontera,155,181,5	script	ROTD	436,{
+while(1){
+
+mes "^FF0000ROTD^000000 se refere a ^0000FFRaca do Dia^000000";
+mes "Em outras palavras, significa que ^0000FF Raca do Dia ^000000 que voce matou de dia ira conceder-lhe ^0000FFBonus extra EXP / Item / Zeny ^000000";
+next;
+mes "[ ^FF0000ROTD Atual^000000 ] = ^0000FF"+.ROTD$[.Race]+"^000000 Race";
+mes "^FF0000_____________________________^000000";
+mes "Bonus Lists :";
+mes "^FF0000@^000000 EXP  = ^0000FF"+( ( !.BonusEXP )?"No":.BonusEXP+" %" )+"^000000 EXP Bonus";
+mes "^FF0000@^000000 Zeny = ^0000FF"+( ( !.BonusZeny )?"No":.BonusZeny )+"^000000 Zeny";
+mes "^FF0000@^000000 Item = ^0000FF"+( ( !.BonusItemAmount )?"No Items":.BonusItemAmount+" x "+getitemname( .BonusItem ) )+"^000000";
+if( .BonusItemAmount ){
+	mes "^FF0000@^000000 Rate = ^0000FF"+.BonusRate+"^000000 %";
+	mes "^FF0000_____________________________^000000";
+	mes "The Amount of Bonus Reward is given ^FF0000Randomly^000000 at a fixed Rate.";
+	}
+next;
+switch(select("^4EEE94ROTD Informacões^000000",
+			( getgmlevel() < .GMLevel )?"":"^FF0000[GM]^000000Definir uma nova raca de monstro",
+			( getgmlevel() < .GMLevel )?"":"^FF0000[GM]^000000Definir a taxa de EXP Bonus",		
+			( getgmlevel() < .GMLevel )?"":"^FF0000[GM]^000000Definir a taxa de  Item / Zeny Bonus")){	
+
+Case 1:
+	mes "Hoje ROTD foi escolhido ^0000FF"+.ROTD$[.Race]+"^000000 , que lhe concedera alguns ^FF0000Bonus extra de EXP^000000.";
+	mes "A quantidade de ^FF0000EXP Bonus^000000 é ^0000FF"+.BonusEXP+" %^000000.";
+	next;
+	mes "Para ^0000FFMembros em grupo^000000, eles so receberao ^FF0000Bonus EXP^000000 se eles nao mataram nenhum monstro.";
+	mes "Além disso, eles precisam ficar no ^FF0000mesmo mapa^000000 para obter a ^FF0000EXP Bonus^000000.";
+	next;
+	break;
+
+Case 2:
+	mes "Choose ^FF0000Aleatorio / Manual^000000 ?";
+	for( set .@i,0; .@i < getarraysize( .ROTD$ ); set .@i,.@i+1 ){
+		mes "[ ^FF0000"+.@i+"^000000. ] ^0000FF"+.ROTD$[.@i]+"^000000 Race";
+		}
+	message strcharinfo(0),"Insira o número. Escolha aleatorio se voce quer ramdomizar a raca para voce.";
+	input .Race,0,getarraysize( .ROTD$ )-1;
+	next;
+	if( .Race == getarraysize( .ROTD$ )-1 ){
+		set .Race,rand( getarraysize( .ROTD$ )-1 );
+	}
+	mes "[ ^FF0000ROTD update^000000 ]";
+	mes "[ ^FF0000updated^000000 ] = ^0000FF"+.ROTD$[.Race]+"^000000 Race";
+	mes "[ ^FF0000Bonus EXP^000000 ] = Extra ^0000FF"+.BonusEXP+"^000000 %";
+	announce "[ ROTD ] : Nova raca : "+.ROTD$[.Race]+" com bonus de EXP de "+.BonusEXP+" % ",bc_blue;
+	delwaitingroom;
+	waitingroom "[ROTD]:"+.ROTD$[.Race]+" ",0;
+	next;
+	break;
+	
+Case 3:
+	mes "Set ^FF0000EXP Aleatorio / Manual^000000"; 
+	mes "Insira 0 para ^0000FFtaxa aleatoria de EXP bonus^000000";
+	mes "Insira ^FF0000TAXA^000000 para ^0000FFtaxa manual de EXP bonus^000000";
+	mes "^FF0000EXP alcance^000000 : 1% ~ 100%";
+	mes "Taxa atual = [ ^0000FF"+.BonusEXP+"^000000 % ]";
+	input .BonusEXP,0,100;
+	if( .BonusEXP == 0 ){
+	set .BonusEXP,rand( 1,100 );
+	}
+	next;
+	mes "A nova taxa de EXP é [ ^0000FF"+.BonusEXP+"^000000 % ]";
+	announce "[ ROTD ] : Nova raca : "+.ROTD$[.Race]+" com bonus de EXP de "+.BonusEXP+" % ",bc_blue;
+	next;
+	break;
+
+Case 4:
+	mes "Voce pode definir um ^FF0000 Item / Zeny Bonus^000000 para o ^0000FFROTD^000000.";
+	mes "Isso funcionara quando voce matar um ^FF0000ROTD's ^000000, havera chances para o jogador ganhar o ^FF0000Item / Zeny^000000.";
+	next;
+	mes "Insira o ^FF0000Zeny Bonus^000000";
+	message strcharinfo(0),"Voce pode inserir 0 para desativa-lo. [ use-o com sabedoria ]";
+	input .BonusZeny;;
+	mes "Insira o ^FF0000Item ID^000000";
+	do{
+		input .BonusItem,0,32767;
+	}while( getitemname( .BonusItem ) == "null" );
+	mes "Insira o ^FF0000Item Bonus Amount^000000";
+	mes "Variacao de Quantidade = 0 ~ 30,000";
+	message strcharinfo(0),"Voce pode inserir 0 para desativa-lo. [ use-o com sabedoria ]";
+	input .BonusItemAmount,0,30000;
+	next;
+	mes "^FF0000Rate^000000 para obte-la ??";
+	mes "^FF0000100 = 100%^000000";
+	mes "^FF0000 10 =  10%^000000";
+	mes "^FF0000  1 =   1%^000000";
+	mes "^FF0000  0 = DESATIVADO^000000";
+	input .BonusRate,0,100;
+	next;
+	mes "[ ^FF0000ROTD Atualizar^000000 ]";
+	mes "^0000FFZeny Bonus^000000 : "+.BonusZeny+" Zeny";
+	mes "^0000FFItem Bonus^000000 : "+.BonusItemAmount+" x "+getitemname( .BonusItem );
+	mes "^0000FFItem Taxa^000000  : "+.BonusRate+" %";
+	next;
+	break;
+	}
+}
+close;
+
+OnInit:
+OnClock0000:
+set .GMLevel,80;
+setarray .ROTD$[0],
+				"Amorfo",
+				"Morto-vivo",
+				"Bruto",
+				"Planta",
+				"Inseto",
+				"Peixe",
+				"Demonio",
+				"Humanoide",
+				"Anjo",
+				"Dragao",
+				"Aleatoria";
+				
+set .Race,rand( 10 );
+set .BonusEXP,rand( 1,100 );
+set .ExpLvlRange,10;
+delwaitingroom;
+waitingroom "[ROTD]:"+.ROTD$[.Race]+" ",0;
+end;
+	
+OnNPCKillEvent:
+if( getmonsterinfo( killedrid,19 ) != .Race  ) end;
+if( getcharid(1) ){
+set .@Location$,strcharinfo(3);
+set .BaseLvl,BaseLevel;
+getpartymember getcharid(1),1;
+getpartymember getcharid(1),2;
+for ( set .@a, 0; .@a < .partymembercount; set .@a, .@a +1 )
+	if ( isloggedin( .partymemberaid[.@a] )  )
+		attachrid( .partymemberaid[.@a] );
+			if( strcharinfo(3) == .@Location$ && ( .BaseLvl - BaseLevel ) <= .ExpLvlRange )
+				getexp ( getmonsterinfo( killedrid,3 ) * .BonusEXP / 100 ),( getmonsterinfo( killedrid,4 ) * .BonusEXP / 100 );
+}else{
+	getexp ( getmonsterinfo( killedrid,3 ) * .BonusEXP / 100 ),( getmonsterinfo( killedrid,4 ) * .BonusEXP / 100 );
+}
+if( rand(100) <= .BonusRate && .BonusItemAmount )
+	getitem .BonusItem,rand( 1,.BonusItemAmount );
+if( rand(100) <= .BonusRate && .BonusZeny )
+	set Zeny,Zeny + rand( 1,.BonusZeny );
+end;
+}
